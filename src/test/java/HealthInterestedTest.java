@@ -7,8 +7,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import business.exception.ValidationException;
+import business.model.HealthInterested;
 import business.model.Interested;
-import health.model.HealthInterested;
 
 @RunWith(value = Parameterized.class)
 public class HealthInterestedTest {

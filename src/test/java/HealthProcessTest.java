@@ -7,16 +7,16 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import business.exception.ValidationException;
+import business.model.HealthInterested;
+import business.model.HealthOrganization;
+import business.model.HealthProcess;
+import business.model.HealthSituation;
+import business.model.HealthSubject;
 import business.model.Interested;
 import business.model.Organization;
 import business.model.Process;
 import business.model.Situation;
 import business.model.Subject;
-import health.model.HealthInterested;
-import health.model.HealthOrganization;
-import health.model.HealthProcess;
-import health.model.HealthSituation;
-import health.model.HealthSubject;
 /**
  * 
  * @author Allan
