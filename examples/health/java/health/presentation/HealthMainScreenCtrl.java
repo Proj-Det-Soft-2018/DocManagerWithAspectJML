@@ -1,0 +1,63 @@
+package health.presentation;
+
+import java.net.URL;
+
+import org.apache.log4j.Logger;
+
+import business.service.ProcessService;
+import health.model.HealthInterested;
+import health.model.HealthProcess;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import presentation.ControllerFactory;
+import presentation.MainScreenCtrl;
+import presentation.utils.DateUtil;
+
+/**
+ * @author hugotho
+ * 
+ */
+public class HealthMainScreenCtrl extends MainScreenCtrl {
+	
+	private static final URL FXML_PATH = MainScreenCtrl.class.getResource("/visions/health_main_screen.fxml");
+	private static final Logger LOGGER = Logger.getLogger(HealthMainScreenCtrl.class);
+	
+	@FXML
+	private TableColumn<HealthProcess, String> tabColumnType;
+
+	@FXML
+	private TableColumn<HealthProcess, String> tabColumnNumber;
+
+	@FXML
+	private TableColumn<HealthProcess, String> tabColumnInterested;
+
+	@FXML
+	private TableColumn<HealthProcess, String> tabColumnSituation;
+	
+	@FXML
+	private TableColumn<HealthProcess, String> tabColumnRegDate;
+
+	public HealthMainScreenCtrl(ProcessService processService, ControllerFactory controllerFactory) {
+		super(processService, controllerFactory, LOGGER);
+	}
+	
+	@Override
+	protected void configureColumns() {
+		tabColumnType.setCellValueFactory(
+				content -> new ReadOnlyStringWrapper(content.getValue().getType()));
+		tabColumnNumber.setCellValueFactory(
+				content -> new ReadOnlyStringWrapper(content.getValue().getFormattedNumber()));
+		tabColumnInterested.setCellValueFactory(
+				content -> new ReadOnlyStringWrapper(((HealthInterested)content.getValue().getIntersted()).getName()));
+		tabColumnSituation.setCellValueFactory(
+				content -> new ReadOnlyStringWrapper(content.getValue().getSituation().getDescription()));
+		tabColumnRegDate.setCellValueFactory(
+		        content -> new ReadOnlyStringWrapper(DateUtil.format(content.getValue().getRegistrationDate())));
+	}
+	
+	@Override
+	public URL getFxmlPath() {
+		return FXML_PATH;
+	}
+}

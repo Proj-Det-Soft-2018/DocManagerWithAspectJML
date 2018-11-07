@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import presentation.utils.widget.MaskedTextField?>
+
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0"
+	prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+	</padding>
+	<children>
+		<VBox minHeight="-Infinity" prefHeight="311.0" prefWidth="790.0"
+			spacing="8.0" styleClass="painel-borda" stylesheets="@../fx_css/styles.css">
+			<children>
+				<Label styleClass="painel-titulo" stylesheets="@../fx_css/styles.css"
+					text="Campos para a Busca" />
+				<GridPane hgap="15.0" vgap="10.0">
+					<columnConstraints>
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
+							maxWidth="121.0" />
+						<ColumnConstraints hgrow="SOMETIMES" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+						<RowConstraints vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0"
+							vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0"
+							vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0"
+							vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0"
+							vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0"
+							vgrow="SOMETIMES" />
+					</rowConstraints>
+					<VBox.margin>
+						<Insets bottom="15.0" left="15.0" right="15.0" />
+					</VBox.margin>
+					<children>
+						<CheckBox fx:id="checkNumber" mnemonicParsing="false"
+							text="Número:" />
+						<VBox fx:id="vbNumero" spacing="8.0" GridPane.columnIndex="1">
+							<children>
+								<MaskedTextField mask="#####.######/####-##" fx:id="mTxtNumber" maxWidth="520.0" />
+							</children>
+						</VBox>
+						<CheckBox fx:id="checkInterested" mnemonicParsing="false"
+							text="Inventariante:" GridPane.rowIndex="1" />
+						<VBox fx:id="vbInteressado" spacing="8.0"
+							GridPane.columnIndex="1" GridPane.rowIndex="1">
+							<children>
+								<HBox spacing="20.0">
+									<children>
+										<RadioButton fx:id="radioNome" mnemonicParsing="false"
+											selected="true" text="Nome">
+											<toggleGroup>
+												<ToggleGroup fx:id="tgNomeCpf" />
+											</toggleGroup>
+										</RadioButton>
+										<RadioButton fx:id="radioCpf" mnemonicParsing="false"
+											text="CPF" toggleGroup="$tgNomeCpf" />
+									</children>
+								</HBox>
+								<TextField fx:id="txtName" maxWidth="520.0" />
+							</children>
+						</VBox>
+						<CheckBox fx:id="checkCourt" mnemonicParsing="false"
+							text="Vara:" GridPane.rowIndex="4" />
+						<ChoiceBox fx:id="cbCourt" maxWidth="520.0"
+							GridPane.columnIndex="1" GridPane.rowIndex="4" />
+						<CheckBox fx:id="checkJudge" mnemonicParsing="false"
+							text="Juiz:" GridPane.rowIndex="5" />
+						<ChoiceBox fx:id="cbJudge" maxWidth="520.0"
+							GridPane.columnIndex="1" GridPane.rowIndex="5" />
+						<CheckBox fx:id="checkSituation" mnemonicParsing="false"
+							text="Situação:" GridPane.rowIndex="6" />
+						<ChoiceBox fx:id="cbSituation" GridPane.columnIndex="1"
+							GridPane.rowIndex="6" />
+						<CheckBox fx:id="checkInventaried" mnemonicParsing="false"
+							text="Inventariado:" GridPane.rowIndex="2" />
+						<CheckBox fx:id="checkLawyer" mnemonicParsing="false"
+							text="Advogado:" GridPane.rowIndex="3" />
+						<TextField fx:id="txtLawyer" maxWidth="520.0"
+							GridPane.columnIndex="1" GridPane.rowIndex="3" />
+						<TextField fx:id="txtInventaried" layoutX="146.0"
+							layoutY="107.0" maxWidth="520.0" GridPane.columnIndex="1"
+							GridPane.rowIndex="2" />
+					</children>
+				</GridPane>
+			</children>
+		</VBox>
+		<HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+			<children>
+				<Button mnemonicParsing="false" onAction="#closeWindow"
+					prefWidth="80.0" text="Voltar" />
+				<Button mnemonicParsing="false" onAction="#limparFormulario"
+					prefWidth="80.0" text="Limpar" />
+				<Button mnemonicParsing="false" onAction="#search" prefWidth="80.0"
+					styleClass="button-accent" stylesheets="@../fx_css/styles.css"
+					text="Buscar" />
+			</children>
+			<padding>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</padding>
+		</HBox>
+		<AnchorPane styleClass="painel-borda" stylesheets="@../fx_css/styles.css">
+			<children>
+				<Label styleClass="painel-titulo" stylesheets="@../fx_css/styles.css"
+					text="Resultados" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+				<TableView fx:id="tableResultados" layoutX="63.0"
+					AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="15.0"
+					AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+					<columns>
+						<TableColumn fx:id="tabColNumber" editable="false"
+							prefWidth="175.0" style="-fx-alignment: CENTER" text="Número" />
+						<TableColumn fx:id="tabColInterested" editable="false"
+							prefWidth="246.0" style="-fx-alignment: CENTER" text="Inventariante" />
+						<TableColumn fx:id="tabColCourt" editable="false"
+							prefWidth="105.0" style="-fx-alignment: CENTER" text="Vara" />
+						<TableColumn fx:id="tabColSituation" editable="false"
+							prefWidth="125.0" style="-fx-alignment: CENTER" text="Situação" />
+						<TableColumn fx:id="tabColRegDate" editable="false"
+							prefWidth="95.0" style="-fx-alignment: CENTER" text="Entrada" />
+					</columns>
+				</TableView>
+				<HBox layoutX="21.0" layoutY="302.0" spacing="10.0"
+					AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0"
+					AnchorPane.rightAnchor="15.0">
+					<children>
+						<Button fx:id="btnVerEditar" disable="true"
+							mnemonicParsing="false" onAction="#showProcessEditScreen" prefWidth="100.0"
+							text="Ver/Editar" />
+						<Button fx:id="btnCertidaoPdf" disable="true"
+							mnemonicParsing="false" onAction="#showPdfViewer" prefWidth="130.0"
+							text="Certidão PDF" />
+						<Button fx:id="btnApagar" disable="true" mnemonicParsing="false"
+							onAction="#showDeleteDialog" prefWidth="80.0" text="Apagar" />
+					</children>
+				</HBox>
+			</children>
+		</AnchorPane>
+	</children>
+</VBox>
