@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0"
+	prefWidth="940.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<TabPane layoutX="0.0" layoutY="0.0" maxHeight="-Infinity"
+			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			prefHeight="569.0" prefWidth="940.0" tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab text="Quantidade por mês e ano">
+					<content>
+						<AnchorPane id="Content" minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<BarChart fx:id="bcPerMonthYear" layoutX="51.0"
+									layoutY="35.0" prefHeight="464.0" prefWidth="838.0"
+									title="Quantidade de Processos Por Mês e Ano">
+									<xAxis>
+										<CategoryAxis fx:id="categoryAxisMonthYear" side="BOTTOM" />
+									</xAxis>
+									<yAxis>
+										<NumberAxis fx:id="numberAxisMonthYear" side="LEFT" />
+									</yAxis>
+								</BarChart>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Quantidade nos últimos 12 meses">
+					<content>
+						<AnchorPane id="Content" minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<BarChart fx:id="bcLastTwelveMonths" layoutX="51.0"
+									layoutY="35.0" prefHeight="464.0" prefWidth="838.0"
+									title="Quantidade de Processos Nos Últimos 12 Meses">
+									<xAxis>
+										<CategoryAxis fx:id="categoryAxisLastYear" side="BOTTOM" />
+									</xAxis>
+									<yAxis>
+										<NumberAxis fx:id="numberAxisLastYear" side="LEFT" />
+									</yAxis>
+								</BarChart>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Quantidade por categoria">
+					<content>
+						<AnchorPane id="Content" minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<SplitPane dividerPositions="0.15604395604395604"
+									focusTraversable="true" layoutX="14.0" layoutY="13.0"
+									prefHeight="506.0" prefWidth="912.0">
+									<items>
+										<AnchorPane minHeight="0.0" minWidth="0.0"
+											prefHeight="430.0" prefWidth="940.0">
+											<children>
+												<RadioButton layoutX="14.0" layoutY="14.0"
+													mnemonicParsing="false" onAction="#createPieChartSubject"
+													selected="true" text="Assunto">
+													<toggleGroup>
+														<ToggleGroup fx:id="tgCategory" />
+													</toggleGroup>
+												</RadioButton>
+												<RadioButton layoutX="14.0" layoutY="48.0"
+													mnemonicParsing="false" onAction="#createPieChartOrganization"
+													text="Orgao" toggleGroup="$tgCategory" />
+												<RadioButton layoutX="14.0" layoutY="80.0"
+													mnemonicParsing="false" onAction="#createPieChartSituation"
+													text="Situaçao" toggleGroup="$tgCategory" />
+											</children>
+										</AnchorPane>
+										<AnchorPane minHeight="0.0" minWidth="0.0"
+											prefHeight="506.0" prefWidth="725.0">
+											<children>
+												<PieChart fx:id="pieChart" layoutX="33.0" layoutY="37.0"
+													legendSide="RIGHT" prefHeight="430.0" prefWidth="700.0"
+													title="" />
+											</children>
+										</AnchorPane>
+									</items>
+								</SplitPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+		<Button mnemonicParsing="false" onAction="#closeWindow"
+			prefWidth="120.0" text="Voltar" AnchorPane.bottomAnchor="15.0"
+			AnchorPane.rightAnchor="15.0" />
+	</children>
+</AnchorPane>

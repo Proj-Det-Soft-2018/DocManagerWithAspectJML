@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0"
+	prefWidth="1030.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+	<padding>
+		<Insets bottom="15.0" left="15.0" right="15.0" top="20.0" />
+	</padding>
+	<children>
+		<Button fx:id="btnNew" layoutX="28.0" layoutY="34.0"
+			mnemonicParsing="false" onAction="#criarFormularioNovo" prefHeight="26.0"
+			prefWidth="140.0" text="Novo..." AnchorPane.leftAnchor="10.0"
+			AnchorPane.topAnchor="25.0" />
+		<Button fx:id="btnEdit" disable="true" layoutX="28.0" layoutY="78.0"
+			mnemonicParsing="false" onAction="#showNewProcessEditScreen" prefHeight="26.0"
+			prefWidth="140.0" text="Ver / Editar" AnchorPane.leftAnchor="10.0"
+			AnchorPane.topAnchor="61.0" />
+		<Button fx:id="btnPdfDoc" disable="true" layoutX="25.0"
+			layoutY="119.0" mnemonicParsing="false" onAction="#showPdfViewer"
+			prefHeight="26.0" prefWidth="140.0" text="Certidão PDF"
+			AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="97.0" />
+		<Button fx:id="btnDelete" disable="true" layoutX="25.0"
+			layoutY="119.0" mnemonicParsing="false" onAction="#showDeleteDialog"
+			prefHeight="26.0" prefWidth="140.0" text="Apagar"
+			AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="133.0" />
+		<Button layoutX="25.0" layoutY="359.0" mnemonicParsing="false"
+			onAction="#showSearchScreen" prefHeight="26.0" prefWidth="140.0" text="Buscar"
+			AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="169.0" />
+		<Button layoutX="25.0" layoutY="359.0" mnemonicParsing="false"
+			onAction="#createStatisticScreen" prefHeight="26.0" prefWidth="140.0"
+			text="Estatísticas" AnchorPane.bottomAnchor="20.0"
+			AnchorPane.leftAnchor="10.0" />
+		<AnchorPane layoutX="186.0" layoutY="19.0" prefHeight="355.0"
+			prefWidth="397.0" styleClass="painel-borda" stylesheets="@../fx_css/styles.css"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="170.0"
+			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<Label layoutX="25.0" layoutY="27.0" styleClass="painel-titulo"
+					stylesheets="@../fx_css/styles.css" text="Processos / Ofícios"
+					AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+				<TableView fx:id="tabProcesses" layoutX="94.0" layoutY="60.0"
+					prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0"
+					AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+					AnchorPane.topAnchor="15.0">
+					<columns>
+						<TableColumn fx:id="tabColumnType" editable="false"
+							prefWidth="75.0" style="-fx-alignment: CENTER" text="Tipo" />
+						<TableColumn fx:id="tabColumnNumber" editable="false"
+							prefWidth="196.0" style="-fx-alignment: CENTER" text="Número" />
+						<TableColumn fx:id="tabColumnInterested" editable="false"
+							prefWidth="270.0" style="-fx-alignment: CENTER" text="Nome Interessado" />
+						<TableColumn fx:id="tabColumnSituation" editable="false"
+							prefWidth="160.0" style="-fx-alignment: CENTER" text="Situação" />
+						<TableColumn fx:id="tabColumnRegDate" editable="false"
+							prefWidth="95.0" style="-fx-alignment: CENTER" text="Entrada" />
+					</columns>
+				</TableView>
+			</children>
+		</AnchorPane>
+	</children>
+</AnchorPane>
