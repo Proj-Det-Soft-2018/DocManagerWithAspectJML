@@ -15,7 +15,7 @@
 	</padding>
 	<children>
 		<Button fx:id="btnNew" layoutX="28.0" layoutY="34.0"
-			mnemonicParsing="false" onAction="#criarFormularioNovo" prefHeight="26.0"
+			mnemonicParsing="false" onAction="#showNewProcessEditScreen" prefHeight="26.0"
 			prefWidth="140.0" text="Novo..." AnchorPane.leftAnchor="10.0"
 			AnchorPane.topAnchor="25.0" />
 		<Button fx:id="btnEdit" disable="true" layoutX="28.0" layoutY="78.0"
@@ -34,7 +34,7 @@
 			onAction="#showSearchScreen" prefHeight="26.0" prefWidth="140.0" text="Buscar"
 			AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="169.0" />
 		<Button layoutX="25.0" layoutY="359.0" mnemonicParsing="false"
-			onAction="#createStatisticScreen" prefHeight="26.0" prefWidth="140.0"
+			onAction="#showStatisticsScreen" prefHeight="26.0" prefWidth="140.0"
 			text="Estatísticas" AnchorPane.bottomAnchor="20.0"
 			AnchorPane.leftAnchor="10.0" />
 		<AnchorPane layoutX="186.0" layoutY="19.0" prefHeight="355.0"
