@@ -84,7 +84,8 @@ Agora na ferramenta Eclipse:
 10. Clique em **Run** e aguarde a compilação do *Maven*.
 11. Se sua **JRE System Library** estiver como [J2ME-1.5] (Padrão) no *Package Explorer*, clique com o botão direito sobre ele e escolha **Properties**. Na tela aberta escolha *JavaSE-1.8* como **Execution environment**
 
-Agora, novamente nas **Run Configurations...**:
+Agora, novamente nas **Run Configurations...**
+
 12.  Crie uma nova **Java Aplication**
 13. Na aba **Main**, selecione o *Workspace* do *DocManager* como *Base Directory* e em *Main Class:* **[exemplo].Main**
 14. Na aba **Classpath**, clique em **User Entries** e aperte o botão **Advanced...**
