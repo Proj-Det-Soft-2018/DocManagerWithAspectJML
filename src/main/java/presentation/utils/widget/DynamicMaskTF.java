@@ -1,6 +1,6 @@
 package presentation.utils.widget;
 
-public class DynamicMaskTextField extends MaskedTextField {
+public class DynamicMaskTF extends MaskedTextField {
 
 	private String originalMask;
 	private boolean dynamic;
@@ -13,7 +13,7 @@ public class DynamicMaskTextField extends MaskedTextField {
 		}
 	}
 
-	public DynamicMaskTextField(String originalMask, int maskOffset) {
+	public DynamicMaskTF(String originalMask, int maskOffset) {
 		super(originalMask);
 		this.originalMask = originalMask;
 		this.origMaskOffset = maskOffset;
