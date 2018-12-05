@@ -22,7 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import presentation.utils.DateUtil;
-import presentation.utils.widget.DynamicMaskTextField;
+import presentation.utils.widget.DynamicMaskTF;
 import presentation.utils.widget.MaskedTextField;
 
 public class HealthSearchScreenCtrl extends SearchScreenCtrl {
@@ -33,7 +33,7 @@ public class HealthSearchScreenCtrl extends SearchScreenCtrl {
 	private ListService listService;
 	
 	private MaskedTextField mTxtCpf;
-	private DynamicMaskTextField dmTxtOficioNum;
+	private DynamicMaskTF dmTxtOficioNum;
 
 	@FXML
 	private VBox vbNumero;
@@ -112,7 +112,7 @@ public class HealthSearchScreenCtrl extends SearchScreenCtrl {
         /* Inicializa os campos de número de Ofício e CPF                     */
         mTxtCpf = new MaskedTextField("###.###.###-##");
         mTxtCpf.setMaxWidth(520.0);
-        dmTxtOficioNum = new DynamicMaskTextField("####/####-*", 9);
+        dmTxtOficioNum = new DynamicMaskTF("####/####-*", 9);
         dmTxtOficioNum.setMaxWidth(520.0);
     }
 
