@@ -12,7 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import presentation.utils.widget.MaskedContactTextField;
+import presentation.utils.widget.MaskedContactTF;
 
 public class HealthInterestedEditCtrl extends InterestedEditCtrl {
 	
@@ -29,7 +29,7 @@ public class HealthInterestedEditCtrl extends InterestedEditCtrl {
 	private TextField txtName;
 	
 	@FXML
-	private MaskedContactTextField txtContact;
+	private MaskedContactTF txtContact;
 	
 	public HealthInterestedEditCtrl(InterestedService interestedService) {
 		super(interestedService, LOGGER);

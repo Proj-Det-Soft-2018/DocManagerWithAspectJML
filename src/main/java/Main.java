@@ -3,7 +3,7 @@
 import business.model.HealthOrganization;
 import business.model.HealthSituation;
 import business.model.HealthSubject;
-import business.service.ConcreteInterestedService;
+import business.service.InterestedServiceImpl;
 import business.service.ConcreteListService;
 import business.service.ConcreteProcessService;
 import business.service.ConcreteStatisticService;
@@ -12,7 +12,7 @@ import business.service.ListService;
 import business.service.ProcessService;
 import business.service.StatisticService;
 import business.service.XmlToPdfAdapter;
-import business.service.XmlToPdfConcreteAdapter;
+import business.service.XmlToPdfAdapterImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import persistence.DaoFactory;
@@ -36,9 +36,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		DaoFactory daoFactory = new DaoFactoryJDBC(); 
-		XmlToPdfAdapter xmlToPdfAdapter = new XmlToPdfConcreteAdapter();
+		XmlToPdfAdapter xmlToPdfAdapter = new XmlToPdfAdapterImpl();
 		ProcessService processService = new ConcreteProcessService(daoFactory, xmlToPdfAdapter);
-		InterestedService interestedService = new ConcreteInterestedService(daoFactory);
+		InterestedService interestedService = new InterestedServiceImpl(daoFactory);
 		StatisticService statisticService = new ConcreteStatisticService(daoFactory);
 
 		ListService listService = new ConcreteListService(

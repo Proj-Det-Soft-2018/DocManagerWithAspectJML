@@ -35,11 +35,11 @@ import org.w3c.dom.Element;
  * {@link https://xmlgraphics.apache.org/fop/}
  * @see XmlToPdfAdapter
  */
-public class XmlToPdfConcreteAdapter implements XmlToPdfAdapter {
+public class XmlToPdfAdapterImpl implements XmlToPdfAdapter {
 
   private static final URL FO_TEMPLATE_PATH =
-      XmlToPdfConcreteAdapter.class.getResource("/fo_templates/xml2fo.xsl");
-  private static final Logger LOGGER = Logger.getLogger(XmlToPdfConcreteAdapter.class);
+      XmlToPdfAdapterImpl.class.getResource("/fo_templates/xml2fo.xsl");
+  private static final Logger LOGGER = Logger.getLogger(XmlToPdfAdapterImpl.class);
 
   // Subsídios para geração de PDF -- Apache Xalan/FOP
   private Transformer xmlToFoTransformer;
@@ -47,12 +47,12 @@ public class XmlToPdfConcreteAdapter implements XmlToPdfAdapter {
   private FOUserAgent foUserAgent;
 
   /**
-   * Construtor da classe {@code XmlToPdfConcreteAdapter}. Nele há a configuração do transformador
+   * Construtor da classe {@code XmlToPdfAdapterImpl}. Nele há a configuração do transformador
    * Apache FOP.
    * 
    * {@link https://xmlgraphics.apache.org/fop/}
    */
-  public XmlToPdfConcreteAdapter() {
+  public XmlToPdfAdapterImpl() {
     xmlToFoTransformer = generateTransformer();
     fopFactory = generateFopFactory();
     foUserAgent = generateFOUserAgent();

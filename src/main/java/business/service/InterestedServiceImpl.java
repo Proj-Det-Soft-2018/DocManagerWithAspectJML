@@ -14,7 +14,7 @@ import persistence.exception.DatabaseException;
  * @author Allan
  *
  */
-public class ConcreteInterestedService extends Observable implements InterestedService {
+public class InterestedServiceImpl extends Observable implements InterestedService {
 
   private InterestedDao interessadoDao;
 
@@ -23,7 +23,7 @@ public class ConcreteInterestedService extends Observable implements InterestedS
    * 
    * @param daoFactory Fábrica de objetos de controle de banco de dados.
    */
-  public ConcreteInterestedService(DaoFactory daoFactory) {
+  public InterestedServiceImpl(DaoFactory daoFactory) {
     interessadoDao = daoFactory.getInterestedDao();
   }
 
