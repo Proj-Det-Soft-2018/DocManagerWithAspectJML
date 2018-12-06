@@ -23,18 +23,11 @@ No Linux Ubuntu sua instalação pode ser obtida pelos comandos:
 	```
 	sudo apt-get install oracle-java8-set-default
 	```
-* **Maven:** disponível na página de [download](http://maven.apache.org/download.cgi) oficial da Apache.
-No Linux Ubuntu sua instalação pode ser obtida pelos repositórios oficiais, utilizando o comando:
-	```
-	sudo apt-get install mvn
-	```
 * **MySQL:** o projeto está configurado para este banco, sua instalação do Linux Ubuntu pode ser adquirida utilizando os repositórios oficiais utilizando o comando:
 	```
 	sudo apt-get install mysql-server
 	```
 * **Eclipse:** este projeto está sendo desenvolvido utilizando esta IDE (em sua versão Oxigen) que está disponível para [download](https://www.eclipse.org/downloads/)  em seu site oficial.
-
-* **JUnit 4.1**: Framework de execução de testes unitários, que já está instalada na IDE Eclipse. 
 
 ### Ferramentas Indicadas
 
@@ -55,16 +48,47 @@ No Linux Ubuntu sua instalação pode ser obtida pelos repositórios oficiais, u
 	Pode ser adquirido na página oficinal de [download](www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html) da Oracle.
 
 ### Instalação
-Para utilização do DocManager é necessaria a criação do banco "docmanager" no banco. Para tanto, no Ubuntu:
+Para utilização do DocManager é necessaria a criação do banco "docmanager" e as tabelas neste banco. Para tanto, no Ubuntu:
 1. abra o Terminal e execute o comando para abrir o **MySQL**:
 	```
 	mysql -u root -p
 	```
-2. Digite a senha para o usuário *root*, solicitada e na tela de comando do MySQL execute os dois comandos:
+2. Digite a senha para o usuário *root*, solicitada e na tela de comando do MySQL execute os seguintes comandos:
 
 	```
 	CREATE DATABASE docmanager;
+	```
+	```
 	USE docmanager;
+	```
+	```
+	CREATE TABLE interessados (
+		id BIGINT NOT NULL AUTO_INCREMENT,
+		nome VARCHAR(255) NOT NULL,
+		cpf VARCHAR(11) NOT NULL UNIQUE,
+		contato VARCHAR(20),
+		PRIMARY KEY (id),
+		UNIQUE KEY (cpf,nome)
+	) ENGINE = InnoDB;
+	```
+	```
+	CREATE TABLE processos (
+		id BIGINT NOT NULL AUTO_INCREMENT,
+		eh_oficio BOOLEAN NOT NULL,
+		numero VARCHAR(100) NOT NULL,
+		interessado_id BIGINT NOT NULL,
+		assunto INT NOT NULL,
+		situacao INT NOT NULL,
+		orgao_origem INT NOT NULL,
+		observacao VARCHAR(255),
+		data_entrada DATE,
+		data_saida DATE,
+		orgao_saida INT,
+		PRIMARY KEY (id),
+		INDEX (interessado_id),
+		FOREIGN KEY (interessado_id)
+		REFERENCES interessados(id)
+	) ENGINE = InnoDB;
 	```
 3. Feche o MySQL.
 	```
@@ -72,33 +96,25 @@ Para utilização do DocManager é necessaria a criação do banco "docmanager" 
 	```
 
 Agora na ferramenta Eclipse:
-1. Vá em **File** > **Import..**
-2. Na tela de seleção escolha **Maven** > **Existing Maven Projects** e clique em **Next>**
-3. Na próxima tela escolha a pasta raiz contendo os **arquivos fonte** e o **pom.xml** obtidos neste repositório.
-4. Na lista *projects* Escolha o **pom.xml** do DocManager e clique em **Finish**
-5. Agora com o projeto carregado no eclipse, vá no menu **Run** > **Run Configurations...**
-6. Crie uma nova **Maven Build**
-7. Na aba Main, selecione como **Base Directory** o *Workspace* do *DocManager* 
-8. No campo **Goals** preencha *"flyway:migrate"*. 
-9. Vá para aba **Environment** e crie a variável *FLYWAY_PASSWORD* com sua senha de ***root*** do banco como *Value*.
-10. Clique em **Run** e aguarde a compilação do *Maven*.
-11. Se sua **JRE System Library** estiver como [J2ME-1.5] (Padrão) no *Package Explorer*, clique com o botão direito sobre ele e escolha **Properties**. Na tela aberta escolha *JavaSE-1.8* como **Execution environment**
 
-Agora, novamente nas **Run Configurations...**
-
-12.  Crie uma nova **Java Aplication**
-13. Na aba **Main**, selecione o *Workspace* do *DocManager* como *Base Directory* e em *Main Class:* **[exemplo].Main**
-14. Na aba **Classpath**, clique em **User Entries** e aperte o botão **Advanced...**
-15. Selecione **Add Folders**, clique em **Ok** e na proxima tela escolha a pasta de recursos da aplicação escolhida.
-16. Na aba **Environment** e crie a variável *DATABASE_PASSWORD* com sua senha de ***root*** do banco como *Value*.
+1. Vá em **File** > **Open Projects from File System...**
+2. Na próxima tela escolha a pasta raiz contendo os arquivos obtidos neste repositório e clique em **Finish**
+3. Se sua **JRE System Library** estiver como [J2ME-1.5] (Padrão) no *Package Explorer*, clique com o botão direito sobre ele e escolha **Properties**. Na tela aberta escolha *JavaSE-1.8* como **Execution environment**
+4. Clique com o botão direito no projeto, vá em **Build Path** >> **Configure Build Path**
+5. Na aba **Source** clique no botão **Add Folder** e selecione a pasta **src/main/resources**
+6. Clique em **Apply and Close**
+7. Agora vá em **Run** >> **Run Configurations...**
+8.  Crie uma nova **Java Aplication**
+9. Na aba **Main**, selecione o *Workspace* do *DocManager* como *Base Directory* e em *Main Class:* **Main**
+10. Na aba **Classpath**, clique em **User Entries** e aperte o botão **Advanced...**
+11. Selecione **Add Folders**, clique em **Ok** e na proxima tela escolha a pasta de recursos da aplicação escolhida.
+12. Na aba **Environment** e crie a variável *DATABASE_PASSWORD* com sua senha de ***root*** do banco como *Value*.
 
 ## Este projeto utiliza
 
 * [Apache Shiro](https://shiro.apache.org/) - Framework de Segurança
 * [Apache Xalan](https://xalan.apache.org/) - Transformação de XML para XSL:FO
 * [Apache FOP](https://xmlgraphics.apache.org/fop/) - Geração de documentos PDF a partir de XSL:FO
-* [Flyway](https://flywaydb.org/) - Ferramenta de Migração de Banco de Dados
-* [Maven](https://maven.apache.org/) - Gerenciamento de Dependências
 
 ## Autores
 
