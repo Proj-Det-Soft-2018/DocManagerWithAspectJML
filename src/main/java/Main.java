@@ -28,30 +28,37 @@ import presentation.MainScreenCtrl;
  */
 public class Main extends Application {
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  //@ public invariant i >= 0;
+  //@ public invariant i >= j;
+  static public int i = 0;
+  static public int j = 0;
 
-	@Override
-	public void start(Stage primaryStage) {
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-		DaoFactory daoFactory = new DaoFactoryJDBC(); 
-		XmlToPdfAdapter xmlToPdfAdapter = new XmlToPdfAdapterImpl();
-		ProcessService processService = new ConcreteProcessService(daoFactory, xmlToPdfAdapter);
-		InterestedService interestedService = new InterestedServiceImpl(daoFactory);
-		StatisticService statisticService = new ConcreteStatisticService(daoFactory);
+  @Override
+  public void start(Stage primaryStage) {
+    
+    i = -1;
 
-		ListService listService = new ConcreteListService(
-				HealthOrganization.getAll(),
-				HealthSubject.getAll(),
-				HealthSituation.getAll());
+    DaoFactory daoFactory = new DaoFactoryJDBC(); 
+    XmlToPdfAdapter xmlToPdfAdapter = new XmlToPdfAdapterImpl();
+    ProcessService processService = new ConcreteProcessService(daoFactory, xmlToPdfAdapter);
+    InterestedService interestedService = new InterestedServiceImpl(daoFactory);
+    StatisticService statisticService = new ConcreteStatisticService(daoFactory);
 
-		ControllerFactory controllerFactory = new HealthControllerFactory(
-				processService,
-				interestedService,
-				listService,
-				statisticService);
+    ListService listService = new ConcreteListService(
+        HealthOrganization.getAll(),
+        HealthSubject.getAll(),
+        HealthSituation.getAll());
 
-		MainScreenCtrl.showMainScreen(primaryStage, controllerFactory.createMainScreenCtrl());
-	}
+    ControllerFactory controllerFactory = new HealthControllerFactory(
+        processService,
+        interestedService,
+        listService,
+        statisticService);
+
+    MainScreenCtrl.showMainScreen(primaryStage, controllerFactory.createMainScreenCtrl());
+  }
 }

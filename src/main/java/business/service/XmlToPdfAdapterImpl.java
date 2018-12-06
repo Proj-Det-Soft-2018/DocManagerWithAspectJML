@@ -93,7 +93,7 @@ public class XmlToPdfAdapterImpl implements XmlToPdfAdapter {
     String path = FO_TEMPLATE_PATH.getPath();
     String folderPath = "file://" + path.substring(0, path.lastIndexOf("/fo_templates/xml2fo.xsl"));
 
-    File config = new File("src/main/resources/fop.xconf");
+    File config = new File("../src/main/resources/fop.xconf");
 
     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
       // Lê o arquivo de configuração do FOP e seta o campo <base> para a pasta "resources"
