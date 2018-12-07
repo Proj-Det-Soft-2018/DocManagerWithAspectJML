@@ -35,64 +35,64 @@ import presentation.utils.widget.MaskedTextField;
  */
 public class HealthProcessEditCtrl extends ProcessEditCtrl{
 
-    private static final URL FXML_PATH = HealthProcessEditCtrl.class.getResource("/visions/health_process_edit_screen.fxml");
-    private static final Logger LOGGER = Logger.getLogger(HealthProcessEditCtrl.class);
+    private static final /*@ spec_public nullable @*/ URL FXML_PATH = HealthProcessEditCtrl.class.getResource("/visions/health_process_edit_screen.fxml");
+    private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(HealthProcessEditCtrl.class);
     
-    private ListService listService;
+    private /*@ spec_public nullable @*/ ListService listService;
 
     @FXML
-    private RadioButton rbProcesso;
+    private /*@ spec_public nullable @*/ RadioButton rbProcesso;
 
     @FXML
-    private RadioButton rbOficio;
+    private /*@ spec_public nullable @*/ RadioButton rbOficio;
 
     @FXML
-    private ToggleGroup tgProcessoOficio;
+    private /*@ spec_public nullable @*/ ToggleGroup tgProcessoOficio;
 
     @FXML
-    private Label lblTipoProcesso;
+    private /*@ spec_public nullable @*/ Label lblTipoProcesso;
 
     @FXML
-    private Label lblNumProcesso;
+    private /*@ spec_public nullable @*/ Label lblNumProcesso;
 
     @FXML
-    private MaskedTextField txtNumProcesso;
+    private /*@ spec_public nullable @*/ MaskedTextField txtNumProcesso;
 
     @FXML
-    private HBox hBoxInteressado;
+    private /*@ spec_public nullable @*/ HBox hBoxInteressado;
 
     @FXML
-    private Label lblCpfInteressado;
+    private /*@ spec_public nullable @*/ Label lblCpfInteressado;
 
     @FXML
-    private MaskedTextField txtCpfInteressado;
+    private /*@ spec_public nullable @*/ MaskedTextField txtCpfInteressado;
 
     @FXML
-    private Button btnBuscarInteressado;
+    private /*@ spec_public nullable @*/ Button btnBuscarInteressado;
 
     @FXML
-    private Label lblTxtNomeInteressado;
+    private /*@ spec_public nullable @*/ Label lblTxtNomeInteressado;
 
     @FXML
-    private Label lblTxtContatoInteressado;
+    private /*@ spec_public nullable @*/ Label lblTxtContatoInteressado;
     
     @FXML
-    private ChoiceBox<String> cbOrgao;
+    private /*@ spec_public nullable @*/ ChoiceBox<String> cbOrgao;
 
     @FXML
-    private ChoiceBox<String> cbAssunto;
+    private /*@ spec_public nullable @*/ ChoiceBox<String> cbAssunto;
 
     @FXML
-    private ChoiceBox<String> cbSituacao;
+    private /*@ spec_public nullable @*/ ChoiceBox<String> cbSituacao;
 
     @FXML
-    private TextArea txtObservacao;
+    private /*@ spec_public nullable @*/ TextArea txtObservacao;
 
     @FXML
-    private Button btnCancelar;
+    private /*@ spec_public nullable @*/ Button btnCancelar;
 
     @FXML
-    private Button btnCadastrar;
+    private /*@ spec_public nullable @*/ Button btnCadastrar;
 
     public HealthProcessEditCtrl(ListService listService, ProcessService processService,
             InterestedService interestedService, ControllerFactory controllerFactory) {

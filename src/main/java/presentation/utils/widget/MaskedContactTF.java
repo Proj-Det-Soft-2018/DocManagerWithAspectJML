@@ -2,8 +2,8 @@ package presentation.utils.widget;
 
 public class MaskedContactTF extends MaskedTextField {
 	
-	private static final String MASK_8DIGITS = "(##) ####-####";
-	private static final String MASK_9DIGITS = "(##) #####-####";
+	private static final /*@ spec_public nullable @*/  String MASK_8DIGITS = "(##) ####-####";
+	private static final /*@ spec_public nullable @*/  String MASK_9DIGITS = "(##) #####-####";
 	
 	public MaskedContactTF() {
 		super(MASK_8DIGITS);

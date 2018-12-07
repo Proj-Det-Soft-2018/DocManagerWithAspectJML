@@ -35,8 +35,8 @@ public class Main extends Application {
   public void start(Stage primaryStage) {
     
     DaoFactory daoFactory = new DaoFactoryJDBC(); 
-    XmlToPdfAdapter xmlToPdfAdapter = new XmlToPdfAdapter();
-    ProcessService processService = new ConcreteProcessService(daoFactory, xmlToPdfAdapter);
+    // XmlToPdfAdapter xmlToPdfAdapter = new XmlToPdfAdapter();
+    ProcessService processService = new ConcreteProcessService(daoFactory/*, xmlToPdfAdapter*/);
     InterestedService interestedService = new InterestedServiceImpl(daoFactory);
     StatisticService statisticService = new ConcreteStatisticService(daoFactory);
 

@@ -45,6 +45,11 @@ public class XmlToPdfAdapter {
     foUserAgent = generateFOUserAgent();
   }
 
+  /*@ 
+  @    ensures \result != null;
+  @  also
+  @    ensures \result == null;
+  @*/
   private Transformer generateTransformer() {
 
     try {
@@ -167,8 +172,6 @@ public class XmlToPdfAdapter {
       LOGGER.error(e.getMessage(), e);
       pdfData = new byte[0];
     }
-
-
     return pdfData;
   }
 }

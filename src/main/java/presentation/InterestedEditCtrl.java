@@ -20,34 +20,15 @@ import persistence.exception.DatabaseException;
 import presentation.utils.StringConstants;
 import presentation.utils.widget.ExceptionAlert;
 
-/**
- * Classe abstrata para controlador da tela de edição de objetos que implementem a interface
- * {@code Interested}. Como é um dos pontos flexíveis do framework, o desenvolvedor deve implementar
- * seus métodos abstratos para obter um controlador para tela de edição de Interessados.
- * 
- * @author hugo
- */
 public abstract class InterestedEditCtrl implements Initializable {
-  private Logger logger;
+  private /*@ spec_public nullable @*/  Logger logger;
 
-  protected Interested interested;
-  private InterestedService interestedService;
+  protected /*@ spec_public nullable @*/  Interested interested;
+  private /*@ spec_public nullable @*/  InterestedService interestedService;
 
-  /**
-   * Referencia ao painel ({@code javafx.scene.layout.Pane} que contêm os elementos da tela.
-   */
   @FXML
-  protected Pane root;
+  protected /*@ spec_public nullable @*/ Pane root;
 
-  /**
-   * Método estático para exibição da tela para edição de objetos que implementem a interface
-   * {@code Interested}. Caso ocorra algum erro na montagem da tela o método exibirá um um
-   * {@code ExceptionAlert}.
-   * 
-   * @param ownerWindow Tela que chamou este método.
-   * @param controller Controlador da tela.
-   * @param process Interessado selecionado para edição.
-   */
   public static void showIntestedEditScreen(Window ownerWindow, InterestedEditCtrl controller,
       Interested interested) {
     try {
@@ -73,12 +54,6 @@ public abstract class InterestedEditCtrl implements Initializable {
     }
   }
 
-  /**
-   * Construtor que deve ser chamado pelas classes que extendam {@code InterestedEditCtrl}.
-   * 
-   * @param interestedService Serviço de interessados
-   * @param logger {@code org.apache.log4j.Logger} para efetuação de logs.
-   */
   protected InterestedEditCtrl(InterestedService interestedService, Logger logger) {
     this.interestedService = interestedService;
     this.logger = logger;
@@ -88,24 +63,12 @@ public abstract class InterestedEditCtrl implements Initializable {
     this.interested = interested;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     populeForm();
   }
 
 
-  /**
-   * Método para execução do evento do botão de confirmação de edição. Nele, obtên-se os dados
-   * inseridos no formulários, monta um interessado e faz-se a tentativa de salvar no banco, fechan-
-   * do a tela em caso de confirmação ou exibindo um {@code ExceptionAlert} caso de usuário cometa
-   * algum erro no preenchimento do objeto ou um genérico {@code ExceptionAlert} em caso de falha no
-   * banco.
-   */
   @FXML
   private void save() {
     Interested editedIntested = mountInterested();
@@ -128,10 +91,6 @@ public abstract class InterestedEditCtrl implements Initializable {
     }
   }
 
-  /**
-   * Método para execução do evento do botão de cancelamento, ou após a edição do interessado. Este
-   * método fecha a tela.
-   */
   @FXML
   private void closeWindow() {
     Stage janela = (Stage) root.getScene().getWindow();
@@ -139,34 +98,11 @@ public abstract class InterestedEditCtrl implements Initializable {
       janela.close();
   }
 
-  /**
-   * Método que dever ser implementado para popular o formário específico de cada aplicação com os
-   * dados do objeto {@code Interested} que será editado
-   */
   protected abstract void populeForm();
 
-  /**
-   * Método que dever ser implementado para montar um objeto {@code Interested} com os dados obtidos
-   * do formário específico para cada aplicação.
-   * 
-   * @return Objeto {@code Interested} com as informações coletadas.
-   */
   protected abstract Interested mountInterested();
 
-  /**
-   * Método que dever ser implementado para obtenção da cena da tela de edição com as dimensões cor-
-   * retas.
-   * 
-   * @param rootParent {@code javafx.scene.Parent} montado pelo {@code javafx.fxml.FXMLLoader}.
-   * @return Cena da tela de edição.
-   */
   protected abstract Scene getDimensionedScene(Parent rootParent);
 
-  /**
-   * Método que dever ser implementado para obtenção do caminho ({@code java.net.URL} para o arquivo
-   * .fxml.
-   * 
-   * @return Caminho para o arquivo.
-   */
   public abstract URL getFxmlPath();
 }

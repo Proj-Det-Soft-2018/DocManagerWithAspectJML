@@ -17,17 +17,17 @@ import java.util.List;
 public class ConcreteListService implements ListService {
 
 
-  private static final String DEFAULT_CHOICEBOX_START = "-- SELECIONE --";
+  private static final /*@ spec_public nullable @*/ String DEFAULT_CHOICEBOX_START = "-- SELECIONE --";
 
-  protected List<String> organizationsInitialsList;
+  protected /*@ spec_public nullable @*/ List<String> organizationsInitialsList;
 
-  protected List<String> organizationsExtendedList;
+  protected /*@ spec_public nullable @*/ List<String> organizationsExtendedList;
 
-  protected List<String> subjectsDescritionList;
+  protected /*@ spec_public nullable @*/ List<String> subjectsDescritionList;
 
-  protected List<String> subjectsShortDescritionList;
+  protected /*@ spec_public nullable @*/ List<String> subjectsShortDescritionList;
 
-  protected List<String> situationsDescritionList;
+  protected /*@ spec_public nullable @*/ List<String> situationsDescritionList;
 
   /**
    * Constrói uma instância de ConcreteListService em que iniciliaza listas de organizações,

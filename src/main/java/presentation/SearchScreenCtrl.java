@@ -26,57 +26,31 @@ import persistence.exception.DatabaseException;
 import presentation.utils.StringConstants;
 import presentation.utils.widget.ExceptionAlert;
 
-/**
- * Classe abstrata para controlador da tela de busca de de objetos que implementem a interface
- * {@code Process} que utiliza objetos que, por sua vez, implementem a interface {@code Search}.
- * Como é um dos pontos flexíveis do framework, o desenvolvedor deve implementar seus métodos
- * abstratos para obter um controlador para a tela.
- * 
- * @author hugo
- * 
- * @see business.model.Process
- * @see business.model.Search
- */
-/**
- * @author hugo
- *
- */
 public abstract class SearchScreenCtrl implements Initializable, Observer {
 
-  private Logger logger;
+  private /*@ spec_public nullable @*/ Logger logger;
 
-  private ControllerFactory controllerFactory;
-  private ProcessService processService;
+  private /*@ spec_public nullable @*/ ControllerFactory controllerFactory;
+  private /*@ spec_public nullable @*/ ProcessService processService;
 
-  private Process selectedProcess;
-  private Search ultimaBusca;
-
-  @FXML
-  private Node root;
+  private /*@ spec_public nullable @*/ Process selectedProcess;
+  private /*@ spec_public nullable @*/ Search ultimaBusca;
 
   @FXML
-  protected TableView<Process> tableResultados;
+  private /*@ spec_public nullable @*/ Node root;
 
   @FXML
-  private Button btnVerEditar;
+  protected /*@ spec_public nullable @*/ TableView<Process> tableResultados;
 
   @FXML
-  private Button btnCertidaoPdf;
+  private /*@ spec_public nullable @*/ Button btnVerEditar;
 
   @FXML
-  private Button btnApagar;
+  private /*@ spec_public nullable @*/ Button btnCertidaoPdf;
 
-  /**
-   * Método estático para exibição da tela para busca de objetos que implementem a interface
-   * {@code Process}. Caso ocorra algum erro na montagem da tela o método exibirá um um
-   * {@code ExceptionAlert}.
-   * 
-   * @param ownerWindow Tela que chamou este método.
-   * @param controller Controlador da tela.
-   * 
-   * @see business.model.Process
-   * @see presentation.utils.widget.ExceptionAlert
-   */
+  @FXML
+  private /*@ spec_public nullable @*/ Button btnApagar;
+
   public static void showSearchScreen(Window ownerWindow, SearchScreenCtrl controller) {
     try {
       FXMLLoader loader = new FXMLLoader(controller.getFxmlPath());
@@ -97,13 +71,6 @@ public abstract class SearchScreenCtrl implements Initializable, Observer {
     }
   }
   
-  /**
-   * Construtor para objetos {@code SearchScreenCtrl}
-   * 
-   * @param controllerFactory Fábrica de Controladores
-   * @param processService Serviço de Processos
-   * @param logger {@code org.apache.log4j.Logger} para efetuação de logs
-   */
   public SearchScreenCtrl(ControllerFactory controllerFactory, ProcessService processService,
       Logger logger) {
     this.controllerFactory = controllerFactory;
@@ -113,9 +80,6 @@ public abstract class SearchScreenCtrl implements Initializable, Observer {
     ultimaBusca = null;
   }
 
-  /* (non-Javadoc)
-   * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     processService.attach(this);
@@ -124,9 +88,6 @@ public abstract class SearchScreenCtrl implements Initializable, Observer {
     Platform.runLater(this::configureClosure);
   }
 
-  /* (non-Javadoc)
-   * @see business.service.Observer#update()
-   */
   @Override
   public void update() {
     if (this.ultimaBusca != null) {
@@ -144,9 +105,6 @@ public abstract class SearchScreenCtrl implements Initializable, Observer {
     }
   }
 
-  /**
-   * Método para configuração de captura de eventos da tabela de processos.
-   */
   private void configureTable() {
     // eventHandle para detectar o processo selecionado
     tableResultados.getSelectionModel().selectedItemProperty()
@@ -160,15 +118,6 @@ public abstract class SearchScreenCtrl implements Initializable, Observer {
     configureColumns();
   }
 
-  /**
-   * Método para execução do evento de clique no botão "Buscar", consiste em montar um objeto que
-   * implemente a interface {@code Search} com os dados do formulário da aplicação e então efetuar
-   * uma busca no serviço de processos. Caso não haja inserção de dados ou problema no acesso ao
-   * banco o método exibirá um {@code ExceptionAlert}.
-   * 
-   * @see business.model.Search
-   * @see presentation.utils.widget.ExceptionAlert
-   */
   @FXML
   private void search() {
 
@@ -185,9 +134,6 @@ public abstract class SearchScreenCtrl implements Initializable, Observer {
     }
   }
 
-  /**
-   * Método para execução do evento do botão de voltar. Fecha a tela.
-   */
   @FXML
   private void closeWindow() {
     Stage window = (Stage) this.root.getScene().getWindow();
@@ -195,80 +141,37 @@ public abstract class SearchScreenCtrl implements Initializable, Observer {
       window.close();
   }
 
-  /**
-   * Configura o fechamento da tela para que, quando ocorra, desvincule este controlador da lista de
-   * observadores do serviço de Processos.
-   */
   private void configureClosure() {
     root.getScene().getWindow().setOnHidden(event -> processService.dettach(this));
   }
   
-  /**
-   * A atualiza a exibição na tabela com a lista passada por parâmetro.
-   *
-   * @param processList Lista de processos para exibição
-   */
   private void updateTable(List<Process> processList) {
     tableResultados.getItems().setAll(processList);
   }
 
-  /**
-   * Método para execução do evento de clique no botão "Ver/Editar", consiste em mostrar a tela de
-   * edição de processos para um processo selecionado na tabela.
-   */
   @FXML
   private void showProcessEditScreen() {
     ProcessEditCtrl.showProcessEditScreen(root.getScene().getWindow(),
         controllerFactory.createProcessEditCtrl(), selectedProcess);
   }
 
-  /**
-   * Método para execução do evento de clique no botão "Apagar", consiste em mostrar um dialog para
-   * confimação com senha para exclusão do processo selecionado.
-   */
   @FXML
   private void showDeleteDialog() {
     DeleteDialogCtrl.showDeleteDialog(root.getScene().getWindow(),
         controllerFactory.createDeleteDialogCtrl(), selectedProcess);
   }
 
-  /**
-   * Método para execução do evento de clique no botão "Certidão Pdf", consiste em mostrar a tela de
-   * visualização de Pdf com o arquivo preparado com o processo selecionado.
-   */
   @FXML
   private void showPdfViewer() {
     PdfViewerCtrl.showPdfViewer(root.getScene().getWindow(),
         controllerFactory.createPdfViewerCtrl(), selectedProcess);
   }
 
-  /**
-   * Método que deve ser implementado para inicializar o formulário, preenchendo os choice-boxes e
-   * configurando eventos.
-   */
   protected abstract void configureForm();
 
-  /**
-   * Método que deve ser implementado para criação de um objeto que implementa a interface 
-   * {@code Search} de acordo com a aplicação.
-   * 
-   * @return Novo objeto de busca
-   * 
-   * @see business.model.Search
-   */
   protected abstract Search mountSearch();
 
-  /**
-   * Método abstrato que deve ser implementado para configurar a forma de preenchimento das linhas
-   * da tabela com os objetos específicos de cada aplicação.
-   */
   protected abstract void configureColumns();
 
-  /**
-   * Método que dever ser implementado para obtenção do caminho ({@code java.net.URL} para o arquivo
-   * .fxml.
-   * 
-   * @return Caminho para o arquivo.
-   */
   public abstract URL getFxmlPath();
 }

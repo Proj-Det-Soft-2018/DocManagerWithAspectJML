@@ -11,7 +11,7 @@ import java.util.List;
  */
 public abstract class Observable {
 
-  List<Observer> observers = new ArrayList<>();
+  private /*@ spec_public nullable @*/ List<Observer> observers = new ArrayList<>();
 
   /**
    * Anexa um observador a classe.

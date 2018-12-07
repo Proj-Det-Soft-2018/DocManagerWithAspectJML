@@ -31,16 +31,16 @@ public class HealthProcess implements Process {
 
 	private static final Logger LOGGER = Logger.getLogger(HealthProcess.class);
 
-	private Long id;
+	private /*@ spec_public nullable @*/ Long id;
 	private boolean oficio;
-	private String number;
-	private Interested interested;
-	private Subject subject;
-	private Organization originEntity;
-	private Situation situation;
-	private String observation;
-	private LocalDateTime registrationDate; //Hora registro do processo no banco
-	private LocalDateTime dispatchDate; //Hora que altera e grava situação para concluido
+	private /*@ spec_public nullable @*/ String number;
+	private /*@ spec_public nullable @*/ Interested interested;
+	private /*@ spec_public nullable @*/ Subject subject;
+	private /*@ spec_public nullable @*/ Organization originEntity;
+	private /*@ spec_public nullable @*/ Situation situation;
+	private /*@ spec_public nullable @*/ String observation;
+	private /*@ spec_public nullable @*/ LocalDateTime registrationDate; //Hora registro do processo no banco
+	private /*@ spec_public nullable @*/ LocalDateTime dispatchDate; //Hora que altera e grava situação para concluido
 
 	public HealthProcess() {
 

@@ -37,9 +37,9 @@ import javafx.scene.control.TextField;
 public class MaskedTextField extends TextField{
     
     // Available properties
-    private StringProperty mask;
-    private StringProperty placeholder;
-    private StringProperty plainText;
+    private /*@ spec_public nullable @*/ StringProperty mask;
+    private /*@ spec_public nullable @*/ StringProperty placeholder;
+    private /*@ spec_public nullable @*/ StringProperty plainText;
     
     // Available masks
     private static final char MASK_ESCAPE = '\'';
@@ -51,7 +51,7 @@ public class MaskedTextField extends TextField{
     private static final char MASK_CHAR_OR_NUM = 'a';
     private static final char MASK_ANYTHING = '*';
     
-    private ArrayList<Mask> semanticMask = new ArrayList<>();
+    private /*@ spec_public nullable @*/ ArrayList<Mask> semanticMask = new ArrayList<>();
     private int maskLength;
     private int semanticMaskLength;
     

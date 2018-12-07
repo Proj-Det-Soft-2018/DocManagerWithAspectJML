@@ -26,38 +26,21 @@ import javafx.stage.Window;
 import presentation.utils.StringConstants;
 import presentation.utils.widget.ExceptionAlert;
 
-/**
- * Classe controladora da tela de visualização e salvamento da certidão em formato Pdf.
- * 
- * @author hugo
- *
- */
 public class PdfViewerCtrl implements Initializable {
 
-  private static final Logger LOGGER = Logger.getLogger(PdfViewerCtrl.class);
-  private static final URL FXML_PATH =
+  private static final /*@ spec_public nullable @*/  Logger LOGGER = Logger.getLogger(PdfViewerCtrl.class);
+  private static final /*@ spec_public nullable @*/  URL FXML_PATH =
       PdfViewerCtrl.class.getResource("/visions/pdf_viewer_screen.fxml");
 
-  private ProcessService processService;
-  /**
-   * Binário do documento Pdf
-   */
-  private byte[] pdfData;
+  private /*@ spec_public nullable @*/  ProcessService processService;
+  private /*@ spec_public nullable @*/  byte[] pdfData;
 
   @FXML
-  private Node root;
+  private /*@ spec_public nullable @*/  Node root;
 
   @FXML
-  private WebView pdfView;
+  private /*@ spec_public nullable @*/  WebView pdfView;
 
-  /**
-   * Método estático para exibição da tela de visualização da certidão em Pdf. Caso ocorra algum
-   * erro na montagem da tela este método exibirá um um {@code ExceptionAlert}.
-   * 
-   * @param ownerWindow Tela que chamou este método.
-   * @param controller Controlador do dialog.
-   * @param process Processo selecionado para geração da certidão.
-   */
   public static void showPdfViewer(Window ownerWindow, PdfViewerCtrl controller, Process process) {
     try {
       FXMLLoader loader = new FXMLLoader(FXML_PATH);
@@ -78,39 +61,19 @@ public class PdfViewerCtrl implements Initializable {
     }
   }
 
-  /**
-   * Construtor para objetos {@code PdfViewerCtrl}.
-   * 
-   * @param processService Serviço de processos.
-   */
   public PdfViewerCtrl(ProcessService processService) {
     this.processService = processService;
   }
 
-  /**
-   * Método para geração do binário do documento do processo fornecido por parâmetro.
-   * 
-   * @param targetProcess Processo que se deseja gerar a certidão
-   */
   private void setProcessPdf(Process targetProcess) {
-    pdfData = processService.getPdf(targetProcess);
+//    pdfData = processService.getPdf(targetProcess);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     configureEngine();
   }
 
-  /**
-   * Método para configuração do {@code javafx.scene.web.WebEngine} do webView utilizado para vi-
-   * sualizar o arquivo pdf. Basicamente configura para carregar o arquivo assim que o webView este-
-   * ja pronto.
-   */
   private void configureEngine() {
 
     WebEngine engine = pdfView.getEngine();
@@ -127,10 +90,6 @@ public class PdfViewerCtrl implements Initializable {
     });
   }
 
-  /**
-   * Método para execução do evento do botão de voltar ou quando salvar o arquivo. Este método fecha
-   * a tela.
-   */
   @FXML
   private void closeWindow() {
     Stage window = (Stage) root.getScene().getWindow();
@@ -138,10 +97,6 @@ public class PdfViewerCtrl implements Initializable {
       window.close();
   }
 
-  /**
-   * Método para execução do evento do botão "Salvar". Este método cria uma nova janela com o
-   * {@code javafx.stage.FileChooser} para geração de um arquivo ({@code java.io.File} de destino.
-   */
   @FXML
   private void savePdfFile() {
     FileChooser fileChooser = new FileChooser();
@@ -167,19 +122,11 @@ public class PdfViewerCtrl implements Initializable {
     }
   }
 
-  /**
-   * Carrega o binário do documento Pdf no visualizador do {@code javafx.scene.web.WebView}.
-   */
   private void loadPdfFile() {
     String pdfBase64 = Base64.getEncoder().encodeToString(pdfData);
     pdfView.getEngine().executeScript("openFileFromBase64('" + pdfBase64 + "')");
   }
 
-  /**
-   * Salva as informações do binário do documento Pdf no arquivo ({@code java.io.File}) fornecido.
-   * 
-   * @param outputFile Arquivo de destino.
-   */
   private void savePdfToFile(File outputFile) {
     try (FileOutputStream fos = new FileOutputStream(outputFile)) {
       fos.write(pdfData);

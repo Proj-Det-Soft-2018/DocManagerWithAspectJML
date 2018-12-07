@@ -18,10 +18,10 @@ import business.exception.ValidationException;
  */
 @XmlRootElement(name="interested")
 public class HealthInterested implements Interested {
-	private Long id;
-	private String name;
-	private String cpf;
-	private String contact;
+	private /*@ spec_public nullable @*/ Long id;
+	private /*@ spec_public nullable @*/ String name;
+	private /*@ spec_public nullable @*/ String cpf;
+	private /*@ spec_public nullable @*/ String contact;
 	
 	
 	
