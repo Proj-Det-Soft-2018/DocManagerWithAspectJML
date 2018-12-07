@@ -15,7 +15,7 @@ import persistence.exception.DatabaseException;
  */
 public class ConcreteStatisticService implements StatisticService {
 
-  private ProcessDao processoDao;
+  private /*@ spec_public nullable @*/ ProcessDao processoDao;
 
   /**
    * Constrói uma instância com uma fábrica de DAO que instancia o atributo processoDao.

@@ -5,9 +5,9 @@ import business.model.Search;
 
 public class HealthProcessSearch implements Search {
     
-    private String number;
-    private String name;
-    private String cpf; 
+    private /*@ spec_public nullable @*/ String number;
+    private /*@ spec_public nullable @*/ String name;
+    private /*@ spec_public nullable @*/ String cpf; 
     private int situationId;
     private int organizationId;
     private int subjectId;

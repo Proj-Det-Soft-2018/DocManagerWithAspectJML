@@ -2,7 +2,7 @@ package presentation.utils.widget;
 
 public class DynamicMaskTF extends MaskedTextField {
 
-	private String originalMask;
+	private /*@ spec_public nullable @*/ String originalMask;
 	private boolean dynamic;
 	private int origMaskOffset;
 	

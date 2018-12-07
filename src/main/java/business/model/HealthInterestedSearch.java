@@ -4,7 +4,7 @@ import business.exception.ValidationException;
 
 public class HealthInterestedSearch implements Search {
     
-    String cpf;
+    private /*@ spec_public nullable @*/ String cpf;
 
     @Override
     public void validate() throws ValidationException {

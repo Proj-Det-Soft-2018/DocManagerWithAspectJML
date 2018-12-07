@@ -16,7 +16,7 @@ import persistence.exception.DatabaseException;
  */
 public class InterestedServiceImpl extends Observable implements InterestedService {
 
-  private InterestedDao interessadoDao;
+  private /*@ spec_public nullable @*/ InterestedDao interessadoDao;
 
   /**
    * Constrói uma instância com uma fábrica de DAO que instancia o atributo interessadoDao.

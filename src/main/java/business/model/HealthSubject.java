@@ -30,8 +30,8 @@ public enum HealthSubject implements Subject {
 	AV_REC_SUPERIOR("Av. por Rec. Superior","Avaliação da capacidade laborativa por recomendação superior"),
 	AV_READAPTACAO("Av. Readaptação","Avaliação da capacidade laborativa para Fins de Readaptação");
 	
-	private String description;
-	private String shortDescription;
+	private /*@ spec_public nullable @*/ String description;
+	private /*@ spec_public nullable @*/ String shortDescription;
 	
 	HealthSubject(String shortDescription, String description){
 		this.shortDescription = shortDescription;

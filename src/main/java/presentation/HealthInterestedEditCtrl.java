@@ -16,20 +16,20 @@ import presentation.utils.widget.MaskedContactTF;
 
 public class HealthInterestedEditCtrl extends InterestedEditCtrl {
 	
-	private static final Logger LOGGER = Logger.getLogger(HealthInterestedEditCtrl.class);
-	private static final URL FXML_PATH = HealthInterestedEditCtrl.class.getResource("/visions/health_interested_edit_screen.fxml");
+	private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(HealthInterestedEditCtrl.class);
+	private static final /*@ spec_public nullable @*/ URL FXML_PATH = HealthInterestedEditCtrl.class.getResource("/visions/health_interested_edit_screen.fxml");
 	
 	@FXML
-	private Label lblAlert;
+	private /*@ spec_public nullable @*/ Label lblAlert;
 	
 	@FXML
-	private Label lblTxtCpf;
+	private /*@ spec_public nullable @*/ Label lblTxtCpf;
 	
 	@FXML
-	private TextField txtName;
+	private /*@ spec_public nullable @*/ TextField txtName;
 	
 	@FXML
-	private MaskedContactTF txtContact;
+	private /*@ spec_public nullable @*/ MaskedContactTF txtContact;
 	
 	public HealthInterestedEditCtrl(InterestedService interestedService) {
 		super(interestedService, LOGGER);

@@ -27,55 +27,55 @@ import presentation.utils.widget.MaskedTextField;
 
 public class HealthSearchScreenCtrl extends SearchScreenCtrl {
 
-    private static final URL FXML_PATH = HealthSearchScreenCtrl.class.getResource("/visions/health_process_search_screen.fxml");
-	private static final Logger LOGGER = Logger.getLogger(HealthSearchScreenCtrl.class);
+    private static final /*@ spec_public nullable @*/ URL FXML_PATH = HealthSearchScreenCtrl.class.getResource("/visions/health_process_search_screen.fxml");
+	private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(HealthSearchScreenCtrl.class);
 	
-	private ListService listService;
+	private /*@ spec_public nullable @*/ ListService listService;
 	
-	private MaskedTextField mTxtCpf;
-	private DynamicMaskTF dmTxtOficioNum;
+	private /*@ spec_public nullable @*/ MaskedTextField mTxtCpf;
+	private /*@ spec_public nullable @*/ DynamicMaskTF dmTxtOficioNum;
 
 	@FXML
-	private VBox vbNumero;
+	private /*@ spec_public nullable @*/ VBox vbNumero;
 
 	@FXML
-	private VBox vbInteressado;
+	private /*@ spec_public nullable @*/ VBox vbInteressado;
 
 	@FXML
-	private CheckBox checkNumero;
+	private /*@ spec_public nullable @*/ CheckBox checkNumero;
 
 	@FXML
-	private CheckBox checkInteressado;
+	private /*@ spec_public nullable @*/ CheckBox checkInteressado;
 
 	@FXML
-	private CheckBox checkOrgao;
+	private /*@ spec_public nullable @*/ CheckBox checkOrgao;
 
 	@FXML
-	private CheckBox checkAssunto;
+	private /*@ spec_public nullable @*/ CheckBox checkAssunto;
 
 	@FXML
-	private CheckBox checkSituacao;
+	private /*@ spec_public nullable @*/ CheckBox checkSituacao;
 
 	@FXML
-	private ToggleGroup tgProcessoOficio;
+	private /*@ spec_public nullable @*/ ToggleGroup tgProcessoOficio;
 
 	@FXML
-	private ToggleGroup tgNomeCpf;
+	private /*@ spec_public nullable @*/ ToggleGroup tgNomeCpf;
 
 	@FXML
-	private RadioButton radioProcesso;
+	private /*@ spec_public nullable @*/ RadioButton radioProcesso;
 
 	@FXML
-	private RadioButton radioOficio;
+	private /*@ spec_public nullable @*/ RadioButton radioOficio;
 
 	@FXML
-	private RadioButton radioNome;
+	private /*@ spec_public nullable @*/ RadioButton radioNome;
 
 	@FXML
-	private RadioButton radioCpf;
+	private /*@ spec_public nullable @*/ RadioButton radioCpf;
 
 	@FXML
-	private MaskedTextField mTxtProcessoNum;
+	private /*@ spec_public nullable @*/ MaskedTextField mTxtProcessoNum;
 
 	@FXML
 	private TextField txtNome;

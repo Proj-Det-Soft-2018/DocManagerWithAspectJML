@@ -39,31 +39,14 @@ import persistence.exception.DatabaseException;
  */
 public class ConcreteProcessService extends Observable implements ProcessService {
 
-  private static final Logger LOGGER = Logger.getLogger(ConcreteProcessService.class);
+  private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(ConcreteProcessService.class);
+  private /*@ spec_public nullable @*/ ProcessDao processoDao;
+  private /*@ spec_public nullable @*/ Subject currentUser;
+  //private /*@ spec_public nullable @*/ XmlToPdfAdapter xmlToPdfAdapter;
 
-  private ProcessDao processoDao;
-
-  /**
-   * Usuário utilizado na autorização de exclusão de processos no Apache Shiro.
-   */
-  private Subject currentUser;
-
-  /**
-   * Adaptador para transformação de sequencias de Xml em documentos Pdf.
-   */
-  private XmlToPdfAdapter xmlToPdfAdapter;
-
-
-  /**
-   * Constrói uma instância de ConcreteProcessService, em que recebe uma fábrica de DAO e um objeto
-   * XmlToPdfAdapter. inicializa o Apache Shiro.
-   * 
-   * @param daoFactory Fábrica de objetos de controle de banco de dados.
-   * @param xmlToPdfAdapter Adaptador para transformação de sequencias de Xml em documentos Pdf.
-   */
-  public ConcreteProcessService(DaoFactory daoFactory, XmlToPdfAdapter xmlToPdfAdapter) {
+  public ConcreteProcessService(DaoFactory daoFactory/*, XmlToPdfAdapter xmlToPdfAdapter*/) {
     processoDao = daoFactory.getProcessDao();
-    this.xmlToPdfAdapter = xmlToPdfAdapter;
+    //this.xmlToPdfAdapter = xmlToPdfAdapter;
 
     // Inicilização do Apache Shiro -- utiliza o resources/shiro.ini
     IniRealm iniRealm = new IniRealm("classpath:shiro.ini");
@@ -97,11 +80,12 @@ public class ConcreteProcessService extends Observable implements ProcessService
     }
 
     if (currentUser.hasRole("admin")) {
+    //if (admUser == "admin" && password == "admin") {
       processoDao.delete(process);
       this.notifyObservers();
     }
 
-    currentUser.logout();
+    //currentUser.logout();
   }
 
   @Override
@@ -114,7 +98,7 @@ public class ConcreteProcessService extends Observable implements ProcessService
   public List<Process> pullList() throws DatabaseException {
     return processoDao.getAllProcessesByPriority();
   }
-
+/*
   @Override
   public byte[] getPdf(Process process) {
     String xml = process.toXml();
@@ -122,12 +106,6 @@ public class ConcreteProcessService extends Observable implements ProcessService
     return xmlToPdfAdapter.transform(timedXml);
   }
 
-  /**
-   * Adiciona a data e hora atual na string xml para ser impresso no documento pdf.
-   * 
-   * @param xml A antiga xml em que deverá ser colocada a informação de data e hora atual.
-   * @return A nova xml com a data e hora atual.
-   */
   private String appendCurrentTimeToXml(String xml) {
 
     String newXml;
@@ -172,4 +150,5 @@ public class ConcreteProcessService extends Observable implements ProcessService
     }
     return newXml;
   }
+*/
 }

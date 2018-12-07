@@ -18,23 +18,23 @@ import presentation.utils.DateUtil;
  */
 public class HealthMainScreenCtrl extends MainScreenCtrl {
 	
-	private static final URL FXML_PATH = MainScreenCtrl.class.getResource("/visions/health_main_screen.fxml");
-	private static final Logger LOGGER = Logger.getLogger(HealthMainScreenCtrl.class);
+	private static final /*@ spec_public nullable @*/ URL FXML_PATH = MainScreenCtrl.class.getResource("/visions/health_main_screen.fxml");
+	private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(HealthMainScreenCtrl.class);
 	
 	@FXML
-	private TableColumn<HealthProcess, String> tabColumnType;
+	private /*@ spec_public nullable @*/  TableColumn<HealthProcess, String> tabColumnType;
 
 	@FXML
-	private TableColumn<HealthProcess, String> tabColumnNumber;
+	private /*@ spec_public nullable @*/  TableColumn<HealthProcess, String> tabColumnNumber;
 
 	@FXML
-	private TableColumn<HealthProcess, String> tabColumnInterested;
+	private /*@ spec_public nullable @*/  TableColumn<HealthProcess, String> tabColumnInterested;
 
 	@FXML
-	private TableColumn<HealthProcess, String> tabColumnSituation;
+	private /*@ spec_public nullable @*/ TableColumn<HealthProcess, String> tabColumnSituation;
 	
 	@FXML
-	private TableColumn<HealthProcess, String> tabColumnRegDate;
+	private /*@ spec_public nullable @*/  TableColumn<HealthProcess, String> tabColumnRegDate;
 
 	public HealthMainScreenCtrl(ProcessService processService, ControllerFactory controllerFactory) {
 		super(processService, controllerFactory, LOGGER);

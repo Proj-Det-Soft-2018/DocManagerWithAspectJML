@@ -33,7 +33,7 @@ public enum HealthOrganization implements Organization {
 	IBGE("Instituto Brasileiro de Geografia e Estatística"),
 	CGU("Ministério da Transparência e Controladoria-Geral da União");
 	
-	private String fullName;
+	private /*@ spec_public nullable @*/ String fullName;
 	
 	HealthOrganization(String fullName) {
 		this.fullName = fullName;

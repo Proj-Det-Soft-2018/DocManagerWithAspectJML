@@ -25,9 +25,9 @@ public enum HealthSituation implements Situation {
   INTIMPED   ("Interessado Impedido de Ser Periciado",  new int[]{1, 14, 2}),
   CONCLUIDO  ("Concluido",                              new int[]{10, 15});
 
-  private String description;
+  private /*@ spec_public nullable @*/ String description;
 
-  private int[] linkedNodesIndexes;
+  private /*@ spec_public nullable @*/ int[] linkedNodesIndexes;
 
   HealthSituation(String description, int[] neighborNodes){
     this.description = description;

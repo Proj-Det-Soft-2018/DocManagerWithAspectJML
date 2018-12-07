@@ -37,52 +37,37 @@ import persistence.exception.DatabaseException;
 import presentation.utils.StringConstants;
 import presentation.utils.widget.ExceptionAlert;
 
-/**
- * Classe controladora da tela de estatísticas dos processos salvos no sistema. Este controlador 
- * gera a estatística do número de processos realizados no ultimo ano, a sua distribuição pelos me-
- * ses do ano e sua contagem de acordo com os classificadores fornecidos pela aplicação. 
- * 
- * @author clah
- */
 public class StatisticsScreenCtrl implements Initializable {
 
-  private static final URL FXML_PATH =
-      PdfViewerCtrl.class.getResource("/visions/statistics_screen.fxml");
-  private static final Logger LOGGER = Logger.getLogger(StatisticsScreenCtrl.class);
+  private static final /*@ spec_public nullable @*/ URL FXML_PATH = PdfViewerCtrl.class.getResource("/visions/statistics_screen.fxml");
+  private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(StatisticsScreenCtrl.class);
 
-  private StatisticService statisticService;
-  private ProcessService processService;
-  private ListService listService;
+  private /*@ spec_public nullable @*/ StatisticService statisticService;
+  private /*@ spec_public nullable @*/ ProcessService processService;
+  private /*@ spec_public nullable @*/ ListService listService;
 
-  private ObservableList<String> monthsObsList = FXCollections.observableArrayList();
-  private ObservableList<String> lastTwelveMonthsObsList = FXCollections.observableArrayList();
+  private /*@ spec_public nullable @*/ ObservableList<String> monthsObsList = FXCollections.observableArrayList();
+  private /*@ spec_public nullable @*/ ObservableList<String> lastTwelveMonthsObsList = FXCollections.observableArrayList();
 
   @FXML
-  private Node root;
+  private /*@ spec_public nullable @*/ Node root;
 
   // First Tab
   @FXML
-  private BarChart<String, Number> bcPerMonthYear;
+  private /*@ spec_public nullable @*/ BarChart<String, Number> bcPerMonthYear;
   @FXML
-  private CategoryAxis categoryAxisMonthYear;
+  private /*@ spec_public nullable @*/ CategoryAxis categoryAxisMonthYear;
 
   // Second tab
   @FXML
-  private BarChart<String, Number> bcLastTwelveMonths;
+  private /*@ spec_public nullable @*/ BarChart<String, Number> bcLastTwelveMonths;
   @FXML
-  private CategoryAxis categoryAxisLastYear;
+  private /*@ spec_public nullable @*/ CategoryAxis categoryAxisLastYear;
 
   // Third tab
   @FXML
-  private PieChart pieChart;
+  private /*@ spec_public nullable @*/ PieChart pieChart;
 
-  /**
-   * Construtor para objetos da classe {@code StatisticsScreenCtrl}.
-   * 
-   * @param statisticService Serviço que oferece as contagens
-   * @param processService Serviço de processos para avaliar se há processos no banco
-   * @param listService Serviço de listas para categorização
-   */
   public StatisticsScreenCtrl(StatisticService statisticService, ProcessService processService,
       ListService listService) {
     this.statisticService = statisticService;
@@ -90,17 +75,6 @@ public class StatisticsScreenCtrl implements Initializable {
     this.listService = listService;
   }
 
-  /**
-   * Método estático para exibição da tela de estatísticas de objetos que implementem a interface
-   * {@code Process}. Caso ocorra algum erro na montagem da tela o método exibirá um um
-   * {@code ExceptionAlert}.
-   * 
-   * @param ownerWindow Tela que chamou este método.
-   * @param controller Controlador da tela.
-   * 
-   * @see business.model.Process
-   * @see presentation.utils.widget.ExceptionAlert
-   */
   public static void showStatisticsScreen(Window ownerWindow, StatisticsScreenCtrl controller) {
     try {
       FXMLLoader loader = new FXMLLoader(FXML_PATH);
@@ -121,9 +95,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /* (non-Javadoc)
-   * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     try {
@@ -140,10 +111,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /**
-   * Cria um gráfico de barras distribuíndo a criação de objetos que implementam {@code Process}
-   * pelos meses e anos.
-   */
   private void createChartQntPerMonthAndYear() {
     /* Converte o array em uma lista e adiciona em nossa ObservableList de meses. */
     monthsObsList.addAll(Arrays.asList(Month.getAll()));
@@ -174,9 +141,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /**
-   * Cria um gráfico de barras mostrando a contagem de processos para cada um dos 12 últimos meses.
-   */
   private void createChartQntLastYear() {
 
     // Converte o array em uma lista e adiciona em nossa ObservableList de meses.
@@ -209,12 +173,6 @@ public class StatisticsScreenCtrl implements Initializable {
 
   }
 
-  /**
-   * Adiquire a lista dos doze últimos meses a partir da data atual.
-   * 
-   * @param currentDate Data atual
-   * @return Lista com os nomes dos últimos 12 meses.
-   */
   private List<String> getMonthList(Calendar currentDate) {
     List<String> monthList = new ArrayList<>();
 
@@ -239,10 +197,6 @@ public class StatisticsScreenCtrl implements Initializable {
     return monthList;
   }
 
-  /**
-   * Método para execução do evento de clique no botão rádio "Situação". Mostra um gráfico em pizza
-   * com as contagens dos processos distribuídos por situação.
-   */
   @FXML
   private void createPieChartSituation() {
     try {
@@ -255,10 +209,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /**
-   * Método para execução do evento de clique no botão rádio "Orgão". Mostra um gráfico em pizza
-   * com as contagens dos processos distribuídos por orgão.
-   */
   @FXML
   private void createPieChartOrganization() {
     try {
@@ -271,10 +221,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /**
-   * Método para execução do evento de clique no botão rádio "Assunto". Mostra um gráfico em pizza
-   * com as contagens dos processos distribuídos por assunto.
-   */
   @FXML
   private void createPieChartSubject() {
     try {
@@ -287,9 +233,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /**
-   * Método para execução do evento do botão de voltar. Fecha a tela.
-   */
   @FXML
   private void closeWindow() {
     Stage janela = (Stage) root.getScene().getWindow();
@@ -298,12 +241,6 @@ public class StatisticsScreenCtrl implements Initializable {
   }
 
 
-  /**
-   * Cria um gráfico de pizza a partir da categoria e dados fornecidos.
-   * 
-   * @param category Rótulo da categoria
-   * @param data Dados
-   */
   private void createPieChart(String category, Map<Integer, Integer> data) {
     if (data != null && !data.isEmpty()) {
       pieChart.setLabelsVisible(false);
@@ -327,13 +264,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /**
-   * Obtem o nome de um elemento da categoria
-   * 
-   * @param categoryId Id do elemento.
-   * @param category Nome da categoria
-   * @return Nome do ememento
-   */
   private String getCategoryNameById(int categoryId, String category) {
     if (category.equalsIgnoreCase("Situação")) {
       return listService.getSituationDescritionById(categoryId);
@@ -346,12 +276,6 @@ public class StatisticsScreenCtrl implements Initializable {
     }
   }
 
-  /**
-   * Define tooltips para as fatias do gráfico de pizza.
-   * @param pcData Dado do gráfico.
-   * 
-   * {@link http://acodigo.blogspot.com.br/2017/08/piechart-javafx.html}
-   */
   public void installTooltip(PieChart.Data pcData) {
 
     String message = String.format("%s : %s", pcData.getName(), (int) pcData.getPieValue());
@@ -362,13 +286,8 @@ public class StatisticsScreenCtrl implements Initializable {
     Tooltip.install(pcData.getNode(), tolltip);
   }
 
-  /**
-   * Classe estática interna para obtenção dos nomes abreviados dos meses do ano. 
-   * 
-   * @author hugo
-   */
   private static class Month {
-    private static String[] names =
+    private static /*@ spec_public nullable @*/  String[] names =
       {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
     private Month() {}

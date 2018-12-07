@@ -1,11 +1,5 @@
 package presentation.utils;
 
-/**
- * Classe de enumeração para referencia às constantes {@code String} utilizadas pelas classes
- * controladores do pacote {@code presentation}.  
- * 
- * @author hugo
- */
 public enum StringConstants {
 	TITLE_APPLICATION ("DocManager"),
 	TITLE_PDF_VIEWER_SCREEN ("Certidão"),
@@ -20,7 +14,7 @@ public enum StringConstants {
 	
 	ERROR_PASSWORD ("Usuário ou Senha Incorretos!");
 	
-	private String text;
+	private /*@ spec_public nullable @*/ String text;
 
 	private StringConstants(String text) {
 		this.text = text;
