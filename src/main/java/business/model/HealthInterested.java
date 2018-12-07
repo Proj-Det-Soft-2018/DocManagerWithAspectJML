@@ -119,6 +119,12 @@ public class HealthInterested implements Interested {
 	public void setContact(String contact){
 		this.contact = contact;
 	}
+	
+  /* ensures name != null && name.length() != 0; 
+	 ensures contact != null && contact.length() > 10; 
+	 ensures this.name.matches("[a-zA-Z\\s]+");
+	 ensures contact != null && contact.length() > 10;
+	*/
 
 	@Override
 	public void validate() throws ValidationException {
@@ -138,6 +144,11 @@ public class HealthInterested implements Interested {
 		if(this.contact == null || (!this.contact.isEmpty() && this.contact.length() < 10)){
 			failure = true;
 			failureMsg.append("O contato inserido está incompleto.\n\n");
+		}
+		
+		if(this.cpf == null || (this.cpf.length() != 11)){
+			failure = true;
+			failureMsg.append("O cpf inserido está incompleto.\n\n");
 		}
 		
 		if(failure) {

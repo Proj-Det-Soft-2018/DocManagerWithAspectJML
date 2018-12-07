@@ -1,3 +1,5 @@
+import business.exception.ValidationException;
+import business.model.HealthInterested;
 import business.model.HealthOrganization;
 import business.model.HealthProcess;
 import business.model.HealthSituation;
@@ -10,7 +12,6 @@ import business.service.InterestedServiceImpl;
 import business.service.ListService;
 import business.service.ProcessService;
 import business.service.StatisticService;
-import business.service.XmlToPdfAdapter;
 import persistence.DaoFactory;
 import persistence.DaoFactoryJDBC;
 import persistence.exception.DatabaseException;
@@ -34,5 +35,6 @@ public class MainJMLTeste {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    
   }
 }
