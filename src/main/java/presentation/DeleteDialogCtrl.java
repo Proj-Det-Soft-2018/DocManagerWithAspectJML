@@ -30,6 +30,7 @@ public class DeleteDialogCtrl {
   private /*@ spec_public nullable @*/ Process process;
   private /*@ spec_public nullable @*/ ProcessService processService;
 
+  @FXML
   private /*@ spec_public nullable @*/ VBox root;
   
   @FXML
