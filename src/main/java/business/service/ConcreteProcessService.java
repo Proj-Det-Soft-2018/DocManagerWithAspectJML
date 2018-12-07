@@ -30,23 +30,27 @@ import persistence.DaoFactory;
 import persistence.ProcessDao;
 import persistence.exception.DatabaseException;
 
-/**
- * Classe que concretiza a interface ProcessService, responsável por gerenciar serviços referente
- * aos processos.
- * 
- * @author clarissa - clahzita@gmail.com
- * @since 24/03/2018
- */
 public class ConcreteProcessService extends Observable implements ProcessService {
 
   private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(ConcreteProcessService.class);
   private /*@ spec_public nullable @*/ ProcessDao processoDao;
   private /*@ spec_public nullable @*/ Subject currentUser;
-  //private /*@ spec_public nullable @*/ XmlToPdfAdapter xmlToPdfAdapter;
+  private /*@ spec_public nullable @*/ XmlToPdfAdapter xmlToPdfAdapter;
 
-  public ConcreteProcessService(DaoFactory daoFactory/*, XmlToPdfAdapter xmlToPdfAdapter*/) {
+  public ConcreteProcessService(DaoFactory daoFactory, XmlToPdfAdapter xmlToPdfAdapter) {
     processoDao = daoFactory.getProcessDao();
-    //this.xmlToPdfAdapter = xmlToPdfAdapter;
+    this.xmlToPdfAdapter = xmlToPdfAdapter;
+
+    // Inicilização do Apache Shiro -- utiliza o resources/shiro.ini
+    IniRealm iniRealm = new IniRealm("classpath:shiro.ini");
+    SecurityManager secutiryManager = new DefaultSecurityManager(iniRealm);
+    SecurityUtils.setSecurityManager(secutiryManager);
+    currentUser = SecurityUtils.getSubject();
+  }
+
+  public ConcreteProcessService(DaoFactory daoFactory) {
+    processoDao = daoFactory.getProcessDao();
+    xmlToPdfAdapter = null;
 
     // Inicilização do Apache Shiro -- utiliza o resources/shiro.ini
     IniRealm iniRealm = new IniRealm("classpath:shiro.ini");
@@ -80,7 +84,7 @@ public class ConcreteProcessService extends Observable implements ProcessService
     }
 
     if (currentUser.hasRole("admin")) {
-    //if (admUser == "admin" && password == "admin") {
+      //if (admUser == "admin" && password == "admin") {
       processoDao.delete(process);
       this.notifyObservers();
     }
@@ -98,7 +102,7 @@ public class ConcreteProcessService extends Observable implements ProcessService
   public List<Process> pullList() throws DatabaseException {
     return processoDao.getAllProcessesByPriority();
   }
-/*
+
   @Override
   public byte[] getPdf(Process process) {
     String xml = process.toXml();
@@ -150,5 +154,4 @@ public class ConcreteProcessService extends Observable implements ProcessService
     }
     return newXml;
   }
-*/
 }

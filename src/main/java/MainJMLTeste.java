@@ -1,42 +1,25 @@
-
-
 import business.model.HealthOrganization;
+import business.model.HealthProcess;
 import business.model.HealthSituation;
 import business.model.HealthSubject;
-import business.service.InterestedServiceImpl;
 import business.service.ConcreteListService;
 import business.service.ConcreteProcessService;
 import business.service.ConcreteStatisticService;
 import business.service.InterestedService;
+import business.service.InterestedServiceImpl;
 import business.service.ListService;
 import business.service.ProcessService;
 import business.service.StatisticService;
 import business.service.XmlToPdfAdapter;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import persistence.DaoFactory;
 import persistence.DaoFactoryJDBC;
-import presentation.ControllerFactory;
-import presentation.HealthControllerFactory;
-import presentation.MainScreenCtrl;
+import persistence.exception.DatabaseException;
 
-
-/**
- * @author hugotho
- * 
- */
-public class Main extends Application {
+public class MainJMLTeste {
 
   public static void main(String[] args) {
-    launch(args);
-  }
-
-  @Override
-  public void start(Stage primaryStage) {
-    
-    DaoFactory daoFactory = new DaoFactoryJDBC(); 
-    // XmlToPdfAdapter xmlToPdfAdapter = new XmlToPdfAdapter();
-    ProcessService processService = new ConcreteProcessService(daoFactory/*, xmlToPdfAdapter*/);
+    DaoFactory daoFactory = new DaoFactoryJDBC();
+    ProcessService processService = new ConcreteProcessService(daoFactory);
     InterestedService interestedService = new InterestedServiceImpl(daoFactory);
     StatisticService statisticService = new ConcreteStatisticService(daoFactory);
 
@@ -44,13 +27,12 @@ public class Main extends Application {
         HealthOrganization.getAll(),
         HealthSubject.getAll(),
         HealthSituation.getAll());
-
-    ControllerFactory controllerFactory = new HealthControllerFactory(
-        processService,
-        interestedService,
-        listService,
-        statisticService);
-
-    MainScreenCtrl.showMainScreen(primaryStage, controllerFactory.createMainScreenCtrl());
+    
+    try {
+      System.out.println(((HealthProcess)(processService.pullList().get(0))).getNumber());
+    } catch (DatabaseException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 }

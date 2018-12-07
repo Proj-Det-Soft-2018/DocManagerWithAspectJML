@@ -71,7 +71,7 @@ public interface ProcessService {
    * 
    * @return Binário do Pdf.
    */
-//  public byte[] getPdf(Process process);
+  public byte[] getPdf(Process process);
 
   /**
    * Anexa um observador na classe para que seja notificado quando ocorre mudanças na lista de

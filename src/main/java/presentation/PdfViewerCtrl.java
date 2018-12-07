@@ -29,8 +29,7 @@ import presentation.utils.widget.ExceptionAlert;
 public class PdfViewerCtrl implements Initializable {
 
   private static final /*@ spec_public nullable @*/  Logger LOGGER = Logger.getLogger(PdfViewerCtrl.class);
-  private static final /*@ spec_public nullable @*/  URL FXML_PATH =
-      PdfViewerCtrl.class.getResource("/visions/pdf_viewer_screen.fxml");
+  private static final /*@ spec_public nullable @*/  URL FXML_PATH = PdfViewerCtrl.class.getResource("/visions/pdf_viewer_screen.fxml");
 
   private /*@ spec_public nullable @*/  ProcessService processService;
   private /*@ spec_public nullable @*/  byte[] pdfData;
@@ -66,7 +65,7 @@ public class PdfViewerCtrl implements Initializable {
   }
 
   private void setProcessPdf(Process targetProcess) {
-//    pdfData = processService.getPdf(targetProcess);
+    pdfData = processService.getPdf(targetProcess);
   }
 
   @Override
