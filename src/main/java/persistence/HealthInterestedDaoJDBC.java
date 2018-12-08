@@ -20,6 +20,7 @@ import persistence.exception.DatabaseException;
  */
 public class HealthInterestedDaoJDBC implements InterestedDao{
 
+  
 	@Override
 	public void save(Interested interested) throws DatabaseException {
 		HealthInterested healthInterested = (HealthInterested)interested;
@@ -45,7 +46,6 @@ public class HealthInterestedDaoJDBC implements InterestedDao{
 			ConnectionFactory.closeConnection(connection, statement);
 		}
 	}
-	
 	
 	@Override
 	public void update(Interested interested) throws DatabaseException {
@@ -74,7 +74,6 @@ public class HealthInterestedDaoJDBC implements InterestedDao{
 	
 	}
 	
-
 	@Override
 	public void delete(Interested interested) throws DatabaseException {
 		Connection connection = null;
@@ -93,6 +92,7 @@ public class HealthInterestedDaoJDBC implements InterestedDao{
 		
 	}
 	
+  
 	@Override
 	public Interested search(Search searchData) throws DatabaseException {
 	    HealthInterestedSearch search = (HealthInterestedSearch) searchData;

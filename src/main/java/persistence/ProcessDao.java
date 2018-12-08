@@ -22,6 +22,9 @@ public interface ProcessDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta salvar no banco de
    *         dados.
    */
+	/*@ requires newProcess != null;
+    @ assignable \nothing;
+	@*/
   public void save(Process newProcess) throws DatabaseException, ValidationException;
 
   /**
@@ -31,6 +34,9 @@ public interface ProcessDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta atualizar processo no
    *         banco de dados.
    */
+  /*@ requires modifiedProcess != null;
+  @ assignable \nothing;
+	@*/
   public void update(Process modifiedProcess) throws DatabaseException;
 
   /**
@@ -40,6 +46,9 @@ public interface ProcessDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta excluir o processo do
    *         banco de dados.
    */
+  /*@ requires process != null;
+  @ assignable \nothing;
+	@*/
   public void delete(Process process) throws DatabaseException;
 
   /**
@@ -49,6 +58,9 @@ public interface ProcessDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta pegar a lista de
    *         processos no banco de dados.
    */
+  /*@ ensures \result != null;
+  @ assignable \nothing;
+	@*/
   public List<Process> getAllProcessesByPriority() throws DatabaseException;
 
   /**

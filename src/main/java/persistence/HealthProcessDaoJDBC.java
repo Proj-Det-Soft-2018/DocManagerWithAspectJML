@@ -78,7 +78,6 @@ public class HealthProcessDaoJDBC implements ProcessDao{
 		
 	}
 	
-	
 	@Override
 	public void update(Process process) throws DatabaseException {
 		
@@ -120,7 +119,6 @@ public class HealthProcessDaoJDBC implements ProcessDao{
 		
 	}
 
-		
 	@Override
 	public void delete(Process process) throws DatabaseException {
 		
@@ -410,7 +408,6 @@ public class HealthProcessDaoJDBC implements ProcessDao{
 			}			
 		}		
 	}
-
 
 
 }

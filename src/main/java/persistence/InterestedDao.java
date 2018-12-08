@@ -11,8 +11,9 @@ import persistence.exception.DatabaseException;
  * @author clah
  * @since 05/04/2018
  */
-public interface InterestedDao {
 
+public interface InterestedDao {
+	
   /**
    * Salva um Interessado no Banco de Dados.
    * 
@@ -20,6 +21,9 @@ public interface InterestedDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta salvar no banco de
    *         dados.
    */
+	/*@ requires newInterested != null;
+    @ assignable \nothing;
+	@*/
   public void save(Interested newInterested) throws DatabaseException;
 
   /**
@@ -29,6 +33,9 @@ public interface InterestedDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta atualizar no banco de
    *         dados.
    */
+/*@ requires modifiedInterested != null;
+  @ assignable \nothing;
+  @*/
   public void update(Interested modifiedInterested) throws DatabaseException;
 
   /**
@@ -37,6 +44,10 @@ public interface InterestedDao {
    * @param interested Interessado a ser deletado.
    * @throws DatabaseException Exceção lançada por inconsistência quando excluir no banco de dados.
    */
+
+/*@ requires interested != null;
+  @ assignable \nothing;
+  @*/
   public void delete(Interested interested) throws DatabaseException;
 
   /**
@@ -47,6 +58,9 @@ public interface InterestedDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar no banco de
    *         dados.
    */
+  /*@ requires searchData != null;
+  @ assignable \nothing;
+  @*/
   public Interested search(Search searchData) throws DatabaseException;
 
 
