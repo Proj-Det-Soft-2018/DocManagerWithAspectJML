@@ -130,8 +130,7 @@ public class HealthInterested implements Interested {
 		this.contact = contact;
 	}
 	
-   /*@ public normal_behavior
-     @	requires this != null;
+   /*@ also
      @ 	ensures this.contact != null && this.contact.length() > 10; 
      @ 	ensures this.name != null && this.name.length() != 0;
      @ 	ensures this.name.matches("[a-zA-Z\\s]+");

@@ -16,6 +16,7 @@ public interface Interested {
    * 
    * @throws ValidationException Exceção lançada por problemas de validação do interessado.
    */
-  public void validate() throws ValidationException;
+  //@ requires this != null;
+  public /*@ pure @*/ void validate() throws ValidationException;
 
 }
