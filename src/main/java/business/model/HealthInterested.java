@@ -25,13 +25,23 @@ public class HealthInterested implements Interested {
 	
 	
 	
+	/*@ requires id != null;
+	  @ requires nome != null && cpf != null && contato != null;
+	  @ ensures this.id == id && this.name == nome;
+	  @	ensures this.cpf == cpf && this.contact == contato;
+	  @*/
 	public HealthInterested(Long id, String nome, String cpf, String contato) {
 		this.id = id;
 		this.name = nome;
 		this.cpf = cpf;
 		this.contact = contato;
+		
 	}
 	
+	/*@ requires nome != null && cpf != null && contato != null;
+	  @ ensures this.name == nome;
+	  @	ensures this.cpf == cpf && this.contact == contato;
+	  @*/
 	public HealthInterested(String nome, String cpf, String contato) {
 		this.name = nome;
 		this.cpf = cpf;
@@ -120,12 +130,13 @@ public class HealthInterested implements Interested {
 		this.contact = contact;
 	}
 	
-  /* ensures name != null && name.length() != 0; 
-	 ensures contact != null && contact.length() > 10; 
-	 ensures this.name.matches("[a-zA-Z\\s]+");
-	 ensures contact != null && contact.length() > 10;
-	*/
-
+   /*@ public normal_behavior
+     @	requires this != null;
+     @ 	ensures this.contact != null && this.contact.length() > 10; 
+     @ 	ensures this.name != null && this.name.length() != 0;
+     @ 	ensures this.name.matches("[a-zA-Z\\s]+");
+     @ 	ensures this.cpf != null && this.cpf.length() == 11;
+	 @*/
 	@Override
 	public void validate() throws ValidationException {
 		
