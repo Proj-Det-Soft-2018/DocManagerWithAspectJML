@@ -395,6 +395,8 @@ public class HealthProcessDaoJDBC implements ProcessDao{
 	 * @throws ValidationException 
 	 * @throws DatabaseException 
 	 */
+	/*@ requires numero != null;
+	@*/
 	private void checkDuplicate(String numero) throws ValidationException, DatabaseException {
 		List<Process> duplicados = this.searchByNumber(numero);
 		if(duplicados != null && !duplicados.isEmpty()) {
