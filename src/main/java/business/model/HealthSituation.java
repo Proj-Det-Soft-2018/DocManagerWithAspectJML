@@ -27,13 +27,22 @@ public enum HealthSituation implements Situation {
 
   private /*@ spec_public nullable @*/ String description;
 
-  private /*@ spec_public nullable @*/ int[] linkedNodesIndexes;
+  private /*@ spec_public @*/ int[] linkedNodesIndexes;
+  
+  //@ public invariant 0 < linkedNodesIndexes.length;
 
+  /*@ requires 0 < neighborNodes.length;
+  @ assignable this.description, this.linkedNodesIndexes;
+  @ ensures this.linkedNodesIndexes == neighborNodes && this.description == description;
+  @*/
   HealthSituation(String description, int[] neighborNodes){
     this.description = description;
     this.linkedNodesIndexes = neighborNodes;
   }
 
+  /*@	ensures \result.size() == 14;
+  @		ensures \result.contains(NULL) == false;
+  @*/
   public static List<Situation> getAll() {
     List<Situation> situationList = new ArrayList<>();
     for(HealthSituation situation : HealthSituation.values()) {
@@ -62,6 +71,9 @@ public enum HealthSituation implements Situation {
     return linkedNodes;
   }
 
+  /*@ requires id >=0 && id < 15;
+  @   ensures \result != null;
+  @*/
   public static HealthSituation getSituationById(int id){
     return HealthSituation.values()[id];
   }

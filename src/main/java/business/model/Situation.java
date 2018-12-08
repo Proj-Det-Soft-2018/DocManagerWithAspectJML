@@ -6,7 +6,8 @@ import java.util.List;
  * Representação de uma Situação em um processo.
  */
 public interface Situation {
-
+	
+	
   String getDescription();
 
   int getId();
@@ -17,5 +18,6 @@ public interface Situation {
    * @return Uma lista de inteiros referente as possíveis situações que poderão ser escolhidas a
    *         partir da atual situação.
    */
+  //@ ensures \result != null && \result.isEmpty() == false;
   List<Situation> getlinkedNodes();
 }
