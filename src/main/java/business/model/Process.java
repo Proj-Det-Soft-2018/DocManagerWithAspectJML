@@ -23,6 +23,8 @@ public interface Process {
    * 
    * @throws ValidationException Exceção lançada por problemas de validação do processo.
    */
-  public void validate() throws ValidationException;
+ /*@ requires this != null;
+   @*/
+  public /*@ pure @*/ void validate() throws ValidationException;
 
 }

@@ -27,7 +27,7 @@ public class HealthProcess implements Process {
 	private static final Logger LOGGER = Logger.getLogger(HealthProcess.class);
 
 	private /*@ spec_public nullable @*/ Long id;
-	private boolean oficio;
+	private /*@ spec_public nullable @*/ boolean oficio;
 	private /*@ spec_public nullable @*/ String number;
 	private /*@ spec_public nullable @*/ Interested interested;
 	private /*@ spec_public nullable @*/ Subject subject;
@@ -40,15 +40,26 @@ public class HealthProcess implements Process {
 	public HealthProcess() {
 
 	}
-
-	public HealthProcess(Long id, boolean tipoOficio, String number,  String observation) {
+	
+	/*@ assignable id, number, tipoOficio, observation;
+	  @ ensures this.id == id && this.oficio == tipoOficio;
+	  @	ensures this.number == number && this.observation == observation;
+	  @*/
+	public HealthProcess(/*@ non_null @*/ Long id, boolean tipoOficio, /*@ non_null @*/ String number,  String observation) {
 		this.id = id;
 		this.oficio = tipoOficio;
 		this.number = number;
 		this.observation = observation;
 	}
 
-	public HealthProcess(boolean tipoOficio, String number, Interested interested, Organization originEntity, Subject subject, Situation situation, String observation) {
+	/*@ assignable id, number, tipoOficio, observation, interested, originEntity, subject, situation;
+	  @ ensures this.interested == interested && this.oficio == tipoOficio;
+	  @	ensures this.number == number && this.observation == observation;
+	  @ ensures this.originEntity == originEntity && this.subject == subject;
+	  @ ensures this.situation == situation;
+	  @*/
+	public HealthProcess(boolean tipoOficio, /*@ non_null @*/String number, /*@ non_null @*/ Interested interested, 
+			/*@ non_null @*/ Organization originEntity, /*@ non_null @*/ Subject subject, /*@ non_null @*/ Situation situation, String observation) {
 		this.oficio = tipoOficio;
 		this.number = number;
 		this.interested = interested;
@@ -242,6 +253,16 @@ public class HealthProcess implements Process {
 	/* (non-Javadoc)
 	 * @see business.model.Process#setDispatchDate(java.time.LocalDateTime)
 	 */
+  /*@	public normal_behavior
+    @		requires dispatchDate.isAfter(this.registrationDate);
+    @		assignable this.dispatchDate;
+    @		ensures this.dispatchDate == dispatchDate;
+    @ also
+	@	public exceptional_behavior
+	@		requires !dispatchDate.isAfter(this.registrationDate);
+    @		assignable this.dispatchDate;
+    @		signals_only ValidationException;
+	@*/
 	public void setDispatchDate(LocalDateTime dispatchDate) throws ValidationException {
 		if(dispatchDate.isAfter(this.registrationDate)) {
 			this.dispatchDate = dispatchDate;
@@ -284,7 +305,33 @@ public class HealthProcess implements Process {
 		}
 		return xml;
 	}
-
+	
+  /*@ also
+    @	public normal_behavior
+    @   	requires this.oficio;
+    @ 		ensures number.length() >= 8 && number.substring(0, 7).matches("[0-9]+");
+    @ also
+    @	public exceptional_behavior
+    @   	requires this.oficio && (number.length() < 8 || !number.substring(0, 7).matches("[0-9]+"));
+    @		signals_only ValidationException;
+    @ also
+    @   requires !this.oficio;
+    @   ensures number.length() == 17 && number.matches("[0-9]+");
+    @ also
+    @	public exceptional_behavior
+    @   	requires !this.oficio && (number.length() != 17 || !number.matches("[0-9]+"));
+    @		signals_only ValidationException;
+    @ also
+    @	public normal_behavior
+    @   	ensures this.interested != null && this.originEntity != HealthOrganization.NULL;
+    @   	ensures this.subject != HealthSubject.NULL && this.situation != HealthSituation.NULL;
+    @ also
+    @   public exceptional_behavior
+	@		requires this.interested == null || this.originEntity == HealthOrganization.NULL;
+	@   	requires this.subject == HealthSubject.NULL || this.situation == HealthSituation.NULL;
+	@   	requires number.length() != 17 && number.matches("[0-9]+");
+	@		signals_only ValidationException;
+	@*/
 	@Override
 	public void validate() throws ValidationException {
 

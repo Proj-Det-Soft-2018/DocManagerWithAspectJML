@@ -71,6 +71,10 @@ public interface ProcessDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar processo pelo
    *         número no banco de dados.
    */
+  /*@ requires number != null; 
+   @ensures \result != null;
+  @ assignable \nothing;
+	@*/
   public List<Process> searchByNumber(String number) throws DatabaseException;
 
   /**
@@ -81,6 +85,10 @@ public interface ProcessDao {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar processo no
    *         banco de dados.
    */
+  /*@ requires searchData != null; 
+  	@ensures \result != null;
+ 	@ assignable \nothing;
+	@*/
   public List<Process> searchAll(Search searchData) throws DatabaseException;
 
   /**
