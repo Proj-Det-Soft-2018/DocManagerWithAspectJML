@@ -17,7 +17,7 @@ import java.util.List;
 public class ConcreteListService implements ListService {
 
 
-  private static final /*@ spec_public nullable @*/ String DEFAULT_CHOICEBOX_START = "-- SELECIONE --";
+  private static final /*@ spec_public @*/ String DEFAULT_CHOICEBOX_START = "-- SELECIONE --";
 
   protected /*@ spec_public nullable @*/ List<String> organizationsInitialsList;
 
@@ -37,6 +37,15 @@ public class ConcreteListService implements ListService {
    * @param subjectsList Lista com todos os assuntos.
    * @param situationsList Lista com todas as situações.
    */
+  /*@ assignable organizationsInitialsList, organizationsExtendedList, 
+  @ 			 subjectsDescritionList, subjectsShortDescritionList,
+  @			 	 situationsDescritionList;
+  @ ensures organizationsList.size() == organizationsInitialsList.size()-1 &&
+  @			organizationsList.size() == organizationsExtendedList.size()-1;
+  @ ensures subjectsList.size() == subjectsDescritionList.size()-1 &&
+  @			subjectsList.size() == subjectsShortDescritionList.size()-1;
+  @ ensures situationsList.size() == situationsDescritionList.size()-1;
+  @*/
   public ConcreteListService(List<Organization> organizationsList, List<Subject> subjectsList,
       List<Situation> situationsList) {
     organizationsInitialsList = new ArrayList<>();
