@@ -92,6 +92,11 @@ public class HealthInterestedDaoJDBC implements InterestedDao{
 		
 	}
 	
+ /*@ also
+   @   requires searchData != null;
+	 @   requires ((HealthInterestedSearch)searchData).getCpf() != null;
+	 @   assignable \nothing;
+	 @*/
   
 	@Override
 	public Interested search(Search searchData) throws DatabaseException {

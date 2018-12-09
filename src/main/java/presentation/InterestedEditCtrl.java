@@ -40,7 +40,7 @@ public abstract class InterestedEditCtrl implements Initializable {
       Stage interestedEditScreen = new Stage();
       interestedEditScreen.initModality(Modality.WINDOW_MODAL);
       interestedEditScreen.initOwner(ownerWindow);
-      if (interested.getId() == null) {
+      if (interested.getId() == 0l) {
         interestedEditScreen.setTitle(StringConstants.TITLE_CREATE_INTERESTED_SCREEN.getText());
       } else {
         interestedEditScreen.setTitle(StringConstants.TITLE_EDIT_INTERESTED_SCREEN.getText());
@@ -76,7 +76,7 @@ public abstract class InterestedEditCtrl implements Initializable {
     try {
       editedIntested.validate();
 
-      if (interested.getId() == null) {
+      if (interested.getId() == 0l) {
         interestedService.save(editedIntested);
       } else {
         editedIntested.setId(interested.getId());

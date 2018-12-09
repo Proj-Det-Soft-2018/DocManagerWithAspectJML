@@ -7,9 +7,18 @@ import business.exception.ValidationException;
  */
 public interface Interested {
 
-  Long getId();
+  //@ model instance Long interestedId;
 
-  void setId(Long id);
+  //@ public invariant interestedId != null && interestedId.longValue() >= 0l;
+
+  //@ ensures \result == interestedId.longValue();
+  public /*@ pure @*/ long getId();
+
+  /*@ requires id >= 0l;
+   @ assignable interestedId;
+   @ ensures interestedId.longValue() == id;
+   @*/
+  public void setId(long id);
 
   /**
    * Método que realiza a validação do Interessado.
@@ -18,5 +27,4 @@ public interface Interested {
    */
   //@ requires this != null;
   public /*@ pure @*/ void validate() throws ValidationException;
-
 }

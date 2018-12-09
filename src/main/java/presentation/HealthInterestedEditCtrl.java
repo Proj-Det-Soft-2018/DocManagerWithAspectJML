@@ -37,7 +37,7 @@ public class HealthInterestedEditCtrl extends InterestedEditCtrl {
 	
 	@Override
 	protected Scene getDimensionedScene(Parent rootParent) {
-		if (interested.getId() == null) {
+		if (interested.getId() == 0l) {
 			return new Scene(rootParent, 400, 260);
 		} else {
 			return new Scene(rootParent, 400, 230);
@@ -48,7 +48,7 @@ public class HealthInterestedEditCtrl extends InterestedEditCtrl {
 	protected void populeForm() {
 		lblTxtCpf.setText(((HealthInterested)interested).getFormatedCpf());
 		
-		if (interested.getId() != null) {
+		if (interested.getId() != 0l) {
 			HealthInterested healthInterested = (HealthInterested) interested;
 			super.root.getChildren().remove(lblAlert);
 			

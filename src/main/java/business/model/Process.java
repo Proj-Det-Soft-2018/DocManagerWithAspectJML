@@ -7,9 +7,18 @@ import business.exception.ValidationException;
  */
 public interface Process {
 	
-	/*@ pure @*/  Long getId();
+  //@ model instance Long processId;
 
-  void setId(Long processId);
+  //@ public invariant processId != null && processId.longValue() >= 0l;
+  
+  //@ ensures \result == processId.longValue();
+	public /*@ pure @*/  long getId();
+
+ /*@ requires id >= 0l;
+   @ assignable processId;
+   @ ensures processId.longValue() == id;
+   @*/
+  public void setId(long id);
 
   /**
    * Transforma o Objeto Processo em um arquivo Xml.

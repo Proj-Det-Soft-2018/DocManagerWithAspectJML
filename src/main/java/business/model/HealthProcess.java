@@ -24,362 +24,290 @@ import business.exception.ValidationException;
 @XmlSeeAlso(HealthInterested.class)
 public class HealthProcess implements Process {
 
-	private static final Logger LOGGER = Logger.getLogger(HealthProcess.class);
+  private static final Logger LOGGER = Logger.getLogger(HealthProcess.class);
 
-	private /*@ spec_public nullable @*/ Long id;
-	private /*@ spec_public nullable @*/ boolean oficio;
-	private /*@ spec_public nullable @*/ String number;
-	private /*@ spec_public nullable @*/ Interested interested;
-	private /*@ spec_public nullable @*/ Subject subject;
-	private /*@ spec_public nullable @*/ Organization originEntity;
-	private /*@ spec_public nullable @*/ Situation situation;
-	private /*@ spec_public nullable @*/ String observation;
-	private /*@ spec_public nullable @*/ LocalDateTime registrationDate; //Hora registro do processo no banco
-	private /*@ spec_public nullable @*/ LocalDateTime dispatchDate; //Hora que altera e grava situação para concluido
+  private /*@ spec_public nullable @*/ Long id; //@ in processId;
+  //@ protected represents processId <- id;
 
-	public HealthProcess() {
+  private /*@ spec_public nullable @*/ boolean oficio;
+  private /*@ spec_public nullable @*/ String number;
+  private /*@ spec_public nullable @*/ Interested interested;
+  private /*@ spec_public nullable @*/ Subject subject;
+  private /*@ spec_public nullable @*/ Organization originEntity;
+  private /*@ spec_public nullable @*/ Situation situation;
+  private /*@ spec_public nullable @*/ String observation;
+  private /*@ spec_public nullable @*/ LocalDateTime registrationDate; //Hora registro do processo no banco
+  private /*@ spec_public nullable @*/ LocalDateTime dispatchDate; //Hora que altera e grava situação para concluido
 
-	}
-	
-	/*@ assignable id, number, tipoOficio, observation;
+  public HealthProcess() {
+    this.id = 0l;
+  }
+
+  /*@ assignable id, number, tipoOficio, observation;
 	  @ ensures this.id == id && this.oficio == tipoOficio;
 	  @	ensures this.number == number && this.observation == observation;
 	  @*/
-	public HealthProcess(/*@ non_null @*/ Long id, boolean tipoOficio, /*@ non_null @*/ String number,  String observation) {
-		this.id = id;
-		this.oficio = tipoOficio;
-		this.number = number;
-		this.observation = observation;
-	}
+  public HealthProcess(/*@ non_null @*/ Long id, boolean tipoOficio, /*@ non_null @*/ String number,  String observation) {
+    this.id = id;
+    this.oficio = tipoOficio;
+    this.number = number;
+    this.observation = observation;
+  }
 
-	/*@ assignable id, number, tipoOficio, observation, interested, originEntity, subject, situation;
+  /*@ assignable id, number, tipoOficio, observation, interested, originEntity, subject, situation;
 	  @ ensures this.interested == interested && this.oficio == tipoOficio;
 	  @	ensures this.number == number && this.observation == observation;
 	  @ ensures this.originEntity == originEntity && this.subject == subject;
 	  @ ensures this.situation == situation;
 	  @*/
-	public HealthProcess(boolean tipoOficio, /*@ non_null @*/String number, /*@ non_null @*/ Interested interested, 
-			/*@ non_null @*/ Organization originEntity, /*@ non_null @*/ Subject subject, /*@ non_null @*/ Situation situation, String observation) {
-		this.oficio = tipoOficio;
-		this.number = number;
-		this.interested = interested;
-		this.originEntity = originEntity;
-		this.subject = subject;
-		this.situation = situation;
-		this.observation = observation;
-	}
+  public HealthProcess(boolean tipoOficio, /*@ non_null @*/String number, /*@ non_null @*/ Interested interested, 
+      /*@ non_null @*/ Organization originEntity, /*@ non_null @*/ Subject subject, /*@ non_null @*/ Situation situation, String observation) {
+    this.id = 0l;
+    this.oficio = tipoOficio;
+    this.number = number;
+    this.interested = interested;
+    this.originEntity = originEntity;
+    this.subject = subject;
+    this.situation = situation;
+    this.observation = observation;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getId()
-	 */
-	@Override
-	@XmlTransient
-	public Long getId() {
-		return id;
-	}
+  @Override
+  @XmlTransient
+  public long getId() {
+    return id.longValue();
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setId(java.lang.Long)
-	 */
-	@Override
-	public void setId(Long processId) {
-		this.id = processId;
-	}
+  @Override
+  public void setId(long processId) {
+    this.id = processId;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#isOficio()
-	 */
-	@XmlTransient
-	public boolean isOficio() {
-		return oficio;
-	}
+  @XmlTransient
+  public boolean isOficio() {
+    return oficio;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setTipoOficio(boolean)
-	 */
-	public void setTipoOficio(boolean oficio) {
-		this.oficio = oficio;
-	}
+  public void setTipoOficio(boolean oficio) {
+    this.oficio = oficio;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getType()
-	 */
-	@XmlElement(name="type")
-	public String getType () {
-		return this.oficio? "Ofício" : "Processo";
-	}
+  @XmlElement(name="type")
+  public String getType () {
+    return this.oficio? "Ofício" : "Processo";
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getFormattedNumber()
-	 */
-	@XmlElement(name="number")
-	public String getFormattedNumber() {
-		if(this.isOficio()) {
-			return this.number.replaceAll("(\\d{4})(\\d{4})(\\w)", "$1/$2-$3");
-		}
-		else {
-			return this.number.replaceAll("(\\d{5})(\\d{6})(\\d{4})(\\d{2})", "$1.$2/$3-$4");
-		}
-	}
+  @XmlElement(name="number")
+  public String getFormattedNumber() {
+    if(this.isOficio()) {
+      return this.number.replaceAll("(\\d{4})(\\d{4})(\\w)", "$1/$2-$3");
+    }
+    else {
+      return this.number.replaceAll("(\\d{5})(\\d{6})(\\d{4})(\\d{2})", "$1.$2/$3-$4");
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getNumber()
-	 */
-	@XmlTransient
-	public String getNumber() {
-		return number;
-	}
+  @XmlTransient
+  public String getNumber() {
+    return number;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setNumber(java.lang.String)
-	 */
-	public void setNumber(String number){
-		this.number = number;
-	}
+  public void setNumber(String number){
+    this.number = number;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getIntersted()
-	 */
-	@XmlElement(name="interested", type=HealthInterested.class)
-	public Interested getIntersted() {
-		return interested;
-	}
+  @XmlElement(name="interested", type=HealthInterested.class)
+  public Interested getIntersted() {
+    return interested;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setInterested(business.model.HealthInterested)
-	 */
-	public void setInterested(Interested interested) {
-		this.interested = interested;
-	}
+  public void setInterested(Interested interested) {
+    this.interested = interested;
+  }
 
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSubjectString()
-	 */
-	@XmlElement(name="subject")
-	public String getSubjectString() {
-		return subject.getDescription();
-	}
+  @XmlElement(name="subject")
+  public String getSubjectString() {
+    return subject.getDescription();
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSubject()
-	 */
-	public Subject getSubject() {
-		return subject;
-	}
+  public Subject getSubject() {
+    return subject;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setSubjectById(int)
-	 */
-	public void setSubjectById(int subjectId){
-		this.subject = HealthSubject.getSubjectById(subjectId);
-	}
+  public void setSubjectById(int subjectId){
+    this.subject = HealthSubject.getSubjectById(subjectId);
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getOriginEntityString()
-	 */
-	@XmlElement(name="origin-entity")
-	public String getOriginEntityString(){
-		return originEntity.getFullName();
-	}
+  @XmlElement(name="origin-entity")
+  public String getOriginEntityString(){
+    return originEntity.getFullName();
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getOriginEntity()
-	 */
-	public Organization getOriginEntity() {
-		return originEntity;
-	}
+  public Organization getOriginEntity() {
+    return originEntity;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setOriginEntityById(int)
-	 */
-	public void setOriginEntityById(int originEntityId){
-		this.originEntity = HealthOrganization.getOrganizationById(originEntityId);
-	}
+  public void setOriginEntityById(int originEntityId){
+    this.originEntity = HealthOrganization.getOrganizationById(originEntityId);
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSituationString()
-	 */
-	@XmlElement(name="situation")
-	public String getSituationString() {
-		return situation.getDescription();
-	}
+  @XmlElement(name="situation")
+  public String getSituationString() {
+    return situation.getDescription();
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSituation()
-	 */
-	public Situation getSituation() {
-		return situation;
-	}
+  public Situation getSituation() {
+    return situation;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setSituationById(int)
-	 */
-	public void setSituationById(int situationId){
-		this.situation = HealthSituation.getSituationById(situationId);
-	}
+  public void setSituationById(int situationId){
+    this.situation = HealthSituation.getSituationById(situationId);
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getObservation()
-	 */
-	@XmlElement(name="observation")
-	public String getObservation() {
-		return observation;
-	}
+  @XmlElement(name="observation")
+  public String getObservation() {
+    return observation;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getRegistrationDate()
-	 */
-	@XmlElement(name="entry-date")
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
+  @XmlElement(name="entry-date")
+  public LocalDateTime getRegistrationDate() {
+    return registrationDate;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setRegistrationDate(java.time.LocalDateTime)
-	 */
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
+  public void setRegistrationDate(LocalDateTime registrationDate) {
+    this.registrationDate = registrationDate;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getDispatchDate()
-	 */
-	@XmlElement(name="out")
-	public LocalDateTime getDispatchDate() {
-		return dispatchDate;
-	}
+  @XmlElement(name="out")
+  public LocalDateTime getDispatchDate() {
+    return dispatchDate;
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setDispatchDate(java.time.LocalDateTime)
-	 */
   /*@	public normal_behavior
-    @		requires dispatchDate.isAfter(this.registrationDate);
-    @		assignable this.dispatchDate;
-    @		ensures this.dispatchDate == dispatchDate;
-    @ also
-	@	public exceptional_behavior
-	@		requires !dispatchDate.isAfter(this.registrationDate);
-    @		assignable this.dispatchDate;
-    @		signals_only ValidationException;
-	@*/
-	public void setDispatchDate(LocalDateTime dispatchDate) throws ValidationException {
-		if(dispatchDate.isAfter(this.registrationDate)) {
-			this.dispatchDate = dispatchDate;
-		}
-		else {
-			throw new ValidationException("Verifique a Data e a Hora do seu computador.");
-		}
-	}
+   @		requires dispatchDate.isAfter(this.registrationDate);
+   @		assignable this.dispatchDate;
+   @		ensures this.dispatchDate == dispatchDate;
+   @ also
+	 @	public exceptional_behavior
+	 @		requires !dispatchDate.isAfter(this.registrationDate);
+   @		assignable this.dispatchDate;
+   @		signals_only ValidationException;
+	 @*/
+  public void setDispatchDate(LocalDateTime dispatchDate) throws ValidationException {
+    if(dispatchDate.isAfter(this.registrationDate)) {
+      this.dispatchDate = dispatchDate;
+    }
+    else {
+      throw new ValidationException("Verifique a Data e a Hora do seu computador.");
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#toXml()
-	 */
-	@Override
-	public String toXml() {
+  @Override
+  public String toXml() {
 
-		StringWriter stringWriter = new StringWriter();
-		String xml = null;
+    StringWriter stringWriter = new StringWriter();
+    String xml = null;
 
-		try {
-			// Conversão do Objeto para um XML
-			JAXBContext jaxbContext = JAXBContext.newInstance(this.getClass());
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
-			jaxbMarshaller.marshal(this, stringWriter);
+    try {
+      // Conversão do Objeto para um XML
+      JAXBContext jaxbContext = JAXBContext.newInstance(this.getClass());
+      Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+      jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
+      jaxbMarshaller.marshal(this, stringWriter);
 
-			xml = stringWriter.toString();
-		} catch (JAXBException e) {
-			// TODO Mandar uma exception para o controller
-			//ExceptionAlert.show("Não foi possível converter o objeto para XML!");
-			LOGGER.error(e.getMessage(), e);
-		} finally {
-			// Fecha o reader e o writer
-			try {
-				stringWriter.close();
-			} catch (IOException e) {
-				// TODO Mandar uma exception para o controller
-				//ExceptionAlert.show("Não foi possível encerrar os processos!");
-				LOGGER.fatal(e.getMessage(), e);
-			}
-		}
-		return xml;
-	}
-	
+      xml = stringWriter.toString();
+    } catch (JAXBException e) {
+      // TODO Mandar uma exception para o controller
+      //ExceptionAlert.show("Não foi possível converter o objeto para XML!");
+      LOGGER.error(e.getMessage(), e);
+    } finally {
+      // Fecha o reader e o writer
+      try {
+        stringWriter.close();
+      } catch (IOException e) {
+        // TODO Mandar uma exception para o controller
+        //ExceptionAlert.show("Não foi possível encerrar os processos!");
+        LOGGER.fatal(e.getMessage(), e);
+      }
+    }
+    return xml;
+  }
+
   /*@ also
-    @	public normal_behavior
-    @   	requires this.oficio;
-    @ 		ensures number.length() >= 8 && number.substring(0, 7).matches("[0-9]+");
-    @ also
-    @	public exceptional_behavior
-    @   	requires this.oficio && (number.length() < 8 || !number.substring(0, 7).matches("[0-9]+"));
-    @		signals_only ValidationException;
-    @ also
-    @   requires !this.oficio;
-    @   ensures number.length() == 17 && number.matches("[0-9]+");
-    @ also
-    @	public exceptional_behavior
-    @   	requires !this.oficio && (number.length() != 17 || !number.matches("[0-9]+"));
-    @		signals_only ValidationException;
-    @ also
-    @	public normal_behavior
-    @   	ensures this.interested != null && this.originEntity != HealthOrganization.NULL;
-    @   	ensures this.subject != HealthSubject.NULL && this.situation != HealthSituation.NULL;
-    @ also
-    @   public exceptional_behavior
+  @	public normal_behavior
+  @   	requires this.oficio;
+  @ 		ensures number.length() >= 8 && number.substring(0, 7).matches("[0-9]+");
+  @ also
+  @	public exceptional_behavior
+  @   	requires this.oficio && (number.length() < 8 || !number.substring(0, 7).matches("[0-9]+"));
+  @		signals_only ValidationException;
+  @ also
+  @   requires !this.oficio;
+  @   ensures number.length() == 17 && number.matches("[0-9]+");
+  @ also
+  @	public exceptional_behavior
+  @   	requires !this.oficio && (number.length() != 17 || !number.matches("[0-9]+"));
+  @		signals_only ValidationException;
+  @ also
+  @	public normal_behavior
+  @   	ensures this.interested != null && this.originEntity != HealthOrganization.NULL;
+  @   	ensures this.subject != HealthSubject.NULL && this.situation != HealthSituation.NULL;
+  @ also
+  @   public exceptional_behavior
 	@		requires this.interested == null || this.originEntity == HealthOrganization.NULL;
 	@   	requires this.subject == HealthSubject.NULL || this.situation == HealthSituation.NULL;
 	@   	requires number.length() != 17 && number.matches("[0-9]+");
 	@		signals_only ValidationException;
 	@*/
-	@Override
-	public void validate() throws ValidationException {
+  @Override
+  public void validate() throws ValidationException {
 
-		StringBuilder failureMsg = new StringBuilder();
-		boolean failure = false;
+    StringBuilder failureMsg = new StringBuilder();
+    boolean failure = false;
 
-		if(this.oficio == true) {
-			if(number.length() < 8) {
-				failure = true;
-				failureMsg.append("O número digitado é inválido.\n\n");
-			}
-			else {
-				if(!number.substring(0, 7).matches("[0-9]+")) {
-					failure = true;
-					failureMsg.append("O número digitado é inválido.\n\n");
-				}
-			}
-		}
-		else {
-			if(!(number.length() == 17) || !(number.matches("[0-9]+"))) {
-				failure = true;
-				failureMsg.append("O número digitado é inválido.\n\n");
-			}
-		}
+    if(this.oficio == true) {
+      if(number.length() < 8) {
+        failure = true;
+        failureMsg.append("O número digitado é inválido.\n\n");
+      }
+      else {
+        if(!number.substring(0, 7).matches("[0-9]+")) {
+          failure = true;
+          failureMsg.append("O número digitado é inválido.\n\n");
+        }
+      }
+    }
+    else {
+      if(!(number.length() == 17) || !(number.matches("[0-9]+"))) {
+        failure = true;
+        failureMsg.append("O número digitado é inválido.\n\n");
+      }
+    }
 
-		if (this.interested == null) {
-			failure = true;
-			failureMsg.append("O campo Interessado é obrigatório.\n\n");
-		}
+    if (this.interested == null) {
+      failure = true;
+      failureMsg.append("O campo Interessado é obrigatório.\n\n");
+    }
 
-		if(this.originEntity == HealthOrganization.NULL) {
-			failure = true;
-			failureMsg.append("O campo Orgão é obrigatório.\n\n");
-		}
+    if(this.originEntity == HealthOrganization.NULL) {
+      failure = true;
+      failureMsg.append("O campo Orgão é obrigatório.\n\n");
+    }
 
-		if(this.subject == HealthSubject.NULL) {
-			failure = true;
-			failureMsg.append("Campo assunto é obrigatório.\n\n");
-		}
+    if(this.subject == HealthSubject.NULL) {
+      failure = true;
+      failureMsg.append("Campo assunto é obrigatório.\n\n");
+    }
 
-		if(this.situation == HealthSituation.NULL) {
-			failure = true;
-			failureMsg.append("O campo Situação é obrigatório.\n\n");
-		}
+    if(this.situation == HealthSituation.NULL) {
+      failure = true;
+      failureMsg.append("O campo Situação é obrigatório.\n\n");
+    }
 
-		if(failure) {
-			failureMsg.delete(failureMsg.length() - 2, failureMsg.length());
-			throw new ValidationException(failureMsg.toString());
-		}
-	}
+    if(failure) {
+      failureMsg.delete(failureMsg.length() - 2, failureMsg.length());
+      throw new ValidationException(failureMsg.toString());
+    }
+  }
 }
