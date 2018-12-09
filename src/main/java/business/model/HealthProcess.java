@@ -17,10 +17,6 @@ import org.apache.log4j.Logger;
 
 import business.exception.ValidationException;
 
-/**
- * @author lets
- *
- */
 @XmlRootElement(name="process")
 @XmlSeeAlso(HealthInterested.class)
 public class HealthProcess implements Process {
