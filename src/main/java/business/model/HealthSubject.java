@@ -56,8 +56,8 @@ public enum HealthSubject implements Subject {
 	    return ordinal();
 	}
 
-	/*@	ensures \result.size() == 21;
-	  @	ensures \result.contains(NULL) == false;
+	/*@	ensures \result.size() == 19;
+	  @	ensures \result.contains(HealthSubject.NULL) == false;
 	  @*/
 	public static List<Subject> getAll() {
 		List<Subject> subjectList = new ArrayList<>();

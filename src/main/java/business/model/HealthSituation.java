@@ -7,7 +7,7 @@ import business.model.Situation;
 
 public enum HealthSituation implements Situation {
 
-//ENUM NAME /DESCRIPTION                               /LINKED NODES*/
+  //ENUM NAME /DESCRIPTION                               /LINKED NODES*/
   NULL       (null,                                     new int[]{0, 1, 13}),
   ANALISE    ("Análise",                                new int[]{1, 2, 3, 14}),
   CONVOCAR   ("A convocar",                             new int[]{1, 14, 2, 4, 6, 7, 9}),
@@ -28,7 +28,7 @@ public enum HealthSituation implements Situation {
   private /*@ spec_public nullable @*/ String description;
 
   private /*@ spec_public @*/ int[] linkedNodesIndexes;
-  
+
   //@ public invariant 0 < linkedNodesIndexes.length;
 
   /*@ requires 0 < neighborNodes.length;
@@ -40,8 +40,8 @@ public enum HealthSituation implements Situation {
     this.linkedNodesIndexes = neighborNodes;
   }
 
-  /*@	ensures \result.size() == 14;
-  @		ensures \result.contains(NULL) == false;
+  /*@	ensures \result.size() == 15;
+  @		ensures \result.contains(HealthSituation.NULL) == false;
   @*/
   public static List<Situation> getAll() {
     List<Situation> situationList = new ArrayList<>();

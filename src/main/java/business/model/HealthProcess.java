@@ -3,6 +3,7 @@ package business.model;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -34,7 +35,10 @@ public class HealthProcess implements Process {
   private /*@ spec_public nullable @*/ Interested interested;
   private /*@ spec_public nullable @*/ Subject subject;
   private /*@ spec_public nullable @*/ Organization originEntity;
+  
   private /*@ spec_public nullable @*/ Situation situation;
+  //@ public constraint situation == null || \old(situation) == null || (\old(situation)).getlinkedNodes().contains(situation);
+  
   private /*@ spec_public nullable @*/ String observation;
   private /*@ spec_public nullable @*/ LocalDateTime registrationDate; //Hora registro do processo no banco
   private /*@ spec_public nullable @*/ LocalDateTime dispatchDate; //Hora que altera e grava situação para concluido

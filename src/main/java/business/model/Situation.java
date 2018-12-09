@@ -19,5 +19,5 @@ public interface Situation {
    *         partir da atual situação.
    */
   //@ ensures \result != null && \result.isEmpty() == false;
-  List<Situation> getlinkedNodes();
+  /*@ pure @*/List<Situation> getlinkedNodes();
 }
