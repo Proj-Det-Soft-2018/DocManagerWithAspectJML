@@ -33,7 +33,7 @@ import persistence.exception.DatabaseException;
 public class ConcreteProcessService extends Observable implements ProcessService {
 
   private static final /*@ spec_public nullable @*/ Logger LOGGER = Logger.getLogger(ConcreteProcessService.class);
-  private /*@ spec_public nullable @*/ ProcessDao processoDao;
+  private /*@ spec_public @*/ ProcessDao processoDao;
   private /*@ spec_public nullable @*/ Subject currentUser;
   private /*@ spec_public nullable @*/ XmlToPdfAdapter xmlToPdfAdapter;
 

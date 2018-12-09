@@ -40,7 +40,6 @@ public interface ProcessService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta atualizar processo no
    *         banco de dados.
    */
-  //@ requires process.getId()!=null;
   public void update(/*@ non_null @*/Process process) throws ValidationException, DatabaseException;
 
   /**
@@ -52,7 +51,7 @@ public interface ProcessService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta excluir interessado
    *         no banco de dados.
    */
-  //@ requires process.getId()!=null && !admUser.isEmpty() && !password.isEmpty();
+  //@ requires !admUser.isEmpty() && !password.isEmpty();
   public void delete(/*@ non_null @*/Process process, /*@ non_null @*/String admUser, /*@ non_null @*/String password) throws DatabaseException;
 
   /**

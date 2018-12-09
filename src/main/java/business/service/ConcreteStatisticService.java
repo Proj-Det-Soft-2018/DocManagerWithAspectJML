@@ -25,7 +25,7 @@ public class ConcreteStatisticService implements StatisticService {
 /*@ assignable processoDao;
   @ ensures processoDao != null;
   @*/
-  public ConcreteStatisticService(/*@not_null@*/DaoFactory daoFactory) {
+  public ConcreteStatisticService(DaoFactory daoFactory) {
     processoDao = daoFactory.getProcessDao();
   }
 
