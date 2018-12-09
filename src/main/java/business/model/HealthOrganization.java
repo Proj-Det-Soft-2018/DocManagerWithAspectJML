@@ -35,7 +35,11 @@ public enum HealthOrganization implements Organization {
 	
 	private /*@ spec_public nullable @*/ String fullName;
 	
-	HealthOrganization(String fullName) {
+
+	  /*@ assignable this.fullName;
+	  @ ensures this.fullName == fullName;
+	  @*/
+	HealthOrganization(/*@ non_null @*/String fullName) {
 		this.fullName = fullName;
 	}
 	
@@ -53,7 +57,10 @@ public enum HealthOrganization implements Organization {
 	public int getId() {
 	    return ordinal();
 	}
-
+	
+	/*@	ensures \result.size() == 24;
+	  @	ensures \result.contains(NULL) == false;
+	  @*/
 	public static List<Organization> getAll() {
 		List<Organization> organizationList = new ArrayList<>();
 		for(HealthOrganization organization : HealthOrganization.values()) {
@@ -63,6 +70,9 @@ public enum HealthOrganization implements Organization {
 		return organizationList;
 	}
 	
+	/*@ requires id >=0 && id < 25;
+	  @   ensures \result != null;
+	  @*/
 	public static HealthOrganization getOrganizationById(int id){
 		return HealthOrganization.values()[id];
 	}
