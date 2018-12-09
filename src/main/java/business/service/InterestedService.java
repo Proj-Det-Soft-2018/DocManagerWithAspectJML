@@ -20,7 +20,7 @@ public interface InterestedService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta salvar no banco de
    *         dados.
    */
-  public void save(Interested interested) throws DatabaseException;
+  public void save(/*@ non_null @*/Interested interested) throws DatabaseException;
 
   /**
    * Atualiza o interessado no banco de dados após validação.
@@ -29,7 +29,7 @@ public interface InterestedService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta atualizar interessado
    *         no banco de dados.
    */
-  public void update(Interested interested) throws DatabaseException;
+  public void update(/*@ non_null @*/Interested interested) throws DatabaseException;
 
   /**
    * Exclui o interessado no banco de dados.
@@ -38,7 +38,7 @@ public interface InterestedService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta excluir interessado
    *         no banco de dados.
    */
-  public void delete(Interested interested) throws DatabaseException;
+  public void delete(/*@ non_null @*/Interested interested) throws DatabaseException;
 
   /**
    * Busca o interessado de acordo com os parametros estabelecidos no searchData.
@@ -49,7 +49,7 @@ public interface InterestedService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta procurar no banco de
    *         dados.
    */
-  public Interested search(Search searchData) throws ValidationException, DatabaseException;
+  public Interested search(/*@ non_null @*/ Search searchData) throws ValidationException, DatabaseException;
 
   /**
    * Anexa um observador na classe para que seja notificado quando ocorre mudanças na lista de
@@ -57,7 +57,7 @@ public interface InterestedService {
    * 
    * @param observer observador que será anexado.
    */
-  public void attach(Observer observer);
+  public void attach(/*@ non_null @*/Observer observer);
 
   /**
    * Desanexa um observador na classe para que não seja mais notificado quando ocorrer mudanças na
@@ -65,5 +65,5 @@ public interface InterestedService {
    * 
    * @param observer observador que será desanexado.
    */
-  public void dettach(Observer observer);
+  public void dettach(/*@ non_null @*/Observer observer);
 }
