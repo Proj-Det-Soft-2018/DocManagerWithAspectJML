@@ -13,7 +13,7 @@ public class HealthInterestedSearch implements Search {
         }
     }
 
-    public String getCpf() {
+    public /*@ pure @*/ String getCpf() {
         return cpf;
     }
 

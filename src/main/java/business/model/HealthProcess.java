@@ -69,49 +69,31 @@ public class HealthProcess implements Process {
 		this.observation = observation;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getId()
-	 */
 	@Override
 	@XmlTransient
 	public Long getId() {
 		return id;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setId(java.lang.Long)
-	 */
 	@Override
 	public void setId(Long processId) {
 		this.id = processId;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#isOficio()
-	 */
 	@XmlTransient
 	public boolean isOficio() {
 		return oficio;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setTipoOficio(boolean)
-	 */
 	public void setTipoOficio(boolean oficio) {
 		this.oficio = oficio;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getType()
-	 */
 	@XmlElement(name="type")
 	public String getType () {
 		return this.oficio? "Ofício" : "Processo";
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getFormattedNumber()
-	 */
 	@XmlElement(name="number")
 	public String getFormattedNumber() {
 		if(this.isOficio()) {
@@ -122,138 +104,84 @@ public class HealthProcess implements Process {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getNumber()
-	 */
 	@XmlTransient
 	public String getNumber() {
 		return number;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setNumber(java.lang.String)
-	 */
 	public void setNumber(String number){
 		this.number = number;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getIntersted()
-	 */
 	@XmlElement(name="interested", type=HealthInterested.class)
 	public Interested getIntersted() {
 		return interested;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setInterested(business.model.HealthInterested)
-	 */
 	public void setInterested(Interested interested) {
 		this.interested = interested;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSubjectString()
-	 */
 	@XmlElement(name="subject")
 	public String getSubjectString() {
 		return subject.getDescription();
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSubject()
-	 */
 	public Subject getSubject() {
 		return subject;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setSubjectById(int)
-	 */
 	public void setSubjectById(int subjectId){
 		this.subject = HealthSubject.getSubjectById(subjectId);
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getOriginEntityString()
-	 */
 	@XmlElement(name="origin-entity")
 	public String getOriginEntityString(){
 		return originEntity.getFullName();
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getOriginEntity()
-	 */
 	public Organization getOriginEntity() {
 		return originEntity;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setOriginEntityById(int)
-	 */
 	public void setOriginEntityById(int originEntityId){
 		this.originEntity = HealthOrganization.getOrganizationById(originEntityId);
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSituationString()
-	 */
 	@XmlElement(name="situation")
 	public String getSituationString() {
 		return situation.getDescription();
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getSituation()
-	 */
 	public Situation getSituation() {
 		return situation;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setSituationById(int)
-	 */
 	public void setSituationById(int situationId){
 		this.situation = HealthSituation.getSituationById(situationId);
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getObservation()
-	 */
 	@XmlElement(name="observation")
 	public String getObservation() {
 		return observation;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getRegistrationDate()
-	 */
 	@XmlElement(name="entry-date")
 	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setRegistrationDate(java.time.LocalDateTime)
-	 */
 	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#getDispatchDate()
-	 */
 	@XmlElement(name="out")
 	public LocalDateTime getDispatchDate() {
 		return dispatchDate;
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#setDispatchDate(java.time.LocalDateTime)
-	 */
-  /*@	public normal_behavior
+	/*@	public normal_behavior
     @		requires dispatchDate.isAfter(this.registrationDate);
     @		assignable this.dispatchDate;
     @		ensures this.dispatchDate == dispatchDate;
@@ -272,9 +200,6 @@ public class HealthProcess implements Process {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see business.model.Process#toXml()
-	 */
 	@Override
 	public String toXml() {
 
@@ -307,26 +232,26 @@ public class HealthProcess implements Process {
 	}
 	
   /*@ also
-    @	public normal_behavior
-    @   	requires this.oficio;
-    @ 		ensures number.length() >= 8 && number.substring(0, 7).matches("[0-9]+");
-    @ also
-    @	public exceptional_behavior
-    @   	requires this.oficio && (number.length() < 8 || !number.substring(0, 7).matches("[0-9]+"));
-    @		signals_only ValidationException;
-    @ also
-    @   requires !this.oficio;
-    @   ensures number.length() == 17 && number.matches("[0-9]+");
-    @ also
-    @	public exceptional_behavior
-    @   	requires !this.oficio && (number.length() != 17 || !number.matches("[0-9]+"));
-    @		signals_only ValidationException;
-    @ also
-    @	public normal_behavior
-    @   	ensures this.interested != null && this.originEntity != HealthOrganization.NULL;
-    @   	ensures this.subject != HealthSubject.NULL && this.situation != HealthSituation.NULL;
-    @ also
-    @   public exceptional_behavior
+  @	public normal_behavior
+  @   	requires this.oficio;
+  @ 		ensures number.length() >= 8 && number.substring(0, 7).matches("[0-9]+");
+  @ also
+  @	public exceptional_behavior
+  @   	requires this.oficio && (number.length() < 8 || !number.substring(0, 7).matches("[0-9]+"));
+  @		signals_only ValidationException;
+  @ also
+  @   requires !this.oficio;
+  @   ensures number.length() == 17 && number.matches("[0-9]+");
+  @ also
+  @	public exceptional_behavior
+  @   	requires !this.oficio && (number.length() != 17 || !number.matches("[0-9]+"));
+  @		signals_only ValidationException;
+  @ also
+  @	public normal_behavior
+  @   	ensures this.interested != null && this.originEntity != HealthOrganization.NULL;
+  @   	ensures this.subject != HealthSubject.NULL && this.situation != HealthSituation.NULL;
+  @ also
+  @   public exceptional_behavior
 	@		requires this.interested == null || this.originEntity == HealthOrganization.NULL;
 	@   	requires this.subject == HealthSubject.NULL || this.situation == HealthSituation.NULL;
 	@   	requires number.length() != 17 && number.matches("[0-9]+");
