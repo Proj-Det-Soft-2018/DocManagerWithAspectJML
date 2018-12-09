@@ -4,14 +4,11 @@ import business.exception.ValidationException;
 
 public class HealthInterestedSearch implements Search {
     
-    private /*@ spec_public nullable @*/ String cpf; //@ in cpfInterested;
-    /*@ protected represents
-    @ cpfInterested = cpf;
-    @*/
+    private /*@ spec_public nullable @*/ String cpf; 
 
     /*@ also
     @  public normal_behavior
-    @ 		ensures  !(cpf.length() != 11);
+    @ 		ensures cpf.length() == 11;
     @ also
     @   public exceptional_behavior
     @ 		requires cpf == null || cpf.length() != 11;

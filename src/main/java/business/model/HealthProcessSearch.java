@@ -7,18 +7,16 @@ public class HealthProcessSearch implements Search {
     
     private /*@ spec_public nullable @*/ String number;
     private /*@ spec_public nullable @*/ String name;
-    private /*@ spec_public nullable @*/ String cpf; //@ in cpfInterested;
-    /*@ protected represents
-    @ cpfInterested = cpf;
-    @*/
-    private /*@ spec_public  @*/int situationId;
-    private /*@ spec_public  @*/int organizationId;
-    private /*@ spec_public  @*/int subjectId;
+    private /*@ spec_public nullable @*/ String cpf;
+    private /*@ spec_public nullable @*/int situationId;
+    private /*@ spec_public nullable @*/int organizationId;
+    private /*@ spec_public nullable @*/int subjectId;
 
     
     /*@ also
     @  public normal_behavior
-    @ 		ensures  !(number == null || number.isEmpty()) || 
+    @ 		ensures  !(cpf == null || cpf.isEmpty()) ||
+    @				 !(number == null || number.isEmpty()) || 
     @ 				 !(name == null || name.isEmpty()) ||
     @ 		         (situationId != 0) || (organizationId != 0) || (subjectId != 0);
     @ also
