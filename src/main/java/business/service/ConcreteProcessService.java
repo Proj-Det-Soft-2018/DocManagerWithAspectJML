@@ -37,6 +37,11 @@ public class ConcreteProcessService extends Observable implements ProcessService
   private /*@ spec_public nullable @*/ Subject currentUser;
   private /*@ spec_public nullable @*/ XmlToPdfAdapter xmlToPdfAdapter;
 
+  
+/*@ assignable processoDao, this.xmlToPdfAdapter, currentUser;
+  @ ensures this.xmlToPdfAdapter == xmlToPdfAdapter;
+  @ ensures this.processoDao != null && this.currentUser != null;
+  @*/
   public ConcreteProcessService(DaoFactory daoFactory, XmlToPdfAdapter xmlToPdfAdapter) {
     processoDao = daoFactory.getProcessDao();
     this.xmlToPdfAdapter = xmlToPdfAdapter;
@@ -47,7 +52,11 @@ public class ConcreteProcessService extends Observable implements ProcessService
     SecurityUtils.setSecurityManager(secutiryManager);
     currentUser = SecurityUtils.getSubject();
   }
-
+  
+  /*@ assignable processoDao, this.xmlToPdfAdapter, currentUser;
+  @ ensures this.xmlToPdfAdapter == xmlToPdfAdapter;
+  @ ensures this.processoDao != null && this.currentUser != null;
+  @*/
   public ConcreteProcessService(DaoFactory daoFactory) {
     processoDao = daoFactory.getProcessDao();
     xmlToPdfAdapter = null;
@@ -79,7 +88,7 @@ public class ConcreteProcessService extends Observable implements ProcessService
     if (!this.currentUser.isAuthenticated()) {
       UsernamePasswordToken token = new UsernamePasswordToken(admUser, password);
       token.setRememberMe(true);
-
+      
       currentUser.login(token); // Joga uma AuthenticationException
     }
 

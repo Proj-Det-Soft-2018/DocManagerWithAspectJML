@@ -16,10 +16,11 @@ public interface StatisticService {
   /**
    * Retorna um map que guarda a quantidade de processos registrados em cada mês do ano.
    * 
-   * @return Map em que a chave é o mês e o valor é uma lista de com as quantidades em cada mês.
+   * @return Map em que a chave é o mês e o valor é uma lista com as quantidades em cada mês.
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar os processos
    *         no banco de dados.
    */
+  //@ ensures \result != null;
   public Map<Integer, ArrayList<Integer>> quantityProcessPerMonthYear() throws DatabaseException;
 
   /**
@@ -30,6 +31,7 @@ public interface StatisticService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar os processos
    *         no banco de dados.
    */
+  //@ ensures \result != null;
   public Map<Integer, ArrayList<Integer>> quantityProcessFromLastYear() throws DatabaseException;
 
   /**
@@ -40,6 +42,7 @@ public interface StatisticService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar os processos
    *         no banco de dados.
    */
+  //@ ensures \result != null;
   public Map<Integer, Integer> quantityProcessPerSituation() throws DatabaseException;
 
   /**
@@ -50,6 +53,7 @@ public interface StatisticService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar os processos
    *         no banco de dados.
    */
+  //@ ensures \result != null;
   public Map<Integer, Integer> quantityProcessPerOrganization() throws DatabaseException;
 
   /**
@@ -60,6 +64,7 @@ public interface StatisticService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta buscar os processos
    *         no banco de dados.
    */
+  //@ ensures \result != null;
   public Map<Integer, Integer> quantityProcessPerSubject() throws DatabaseException;
 
 }

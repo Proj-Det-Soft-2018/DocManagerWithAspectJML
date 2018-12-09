@@ -15,14 +15,17 @@ import persistence.exception.DatabaseException;
  */
 public class ConcreteStatisticService implements StatisticService {
 
-  private /*@ spec_public nullable @*/ ProcessDao processoDao;
+  private /*@ spec_public @*/ ProcessDao processoDao;
 
   /**
    * Constrói uma instância com uma fábrica de DAO que instancia o atributo processoDao.
    * 
    * @param daoFactory Fábrica de objetos de controle de banco de dados.
    */
-  public ConcreteStatisticService(DaoFactory daoFactory) {
+/*@ assignable processoDao;
+  @ ensures processoDao != null;
+  @*/
+  public ConcreteStatisticService(/*@not_null@*/DaoFactory daoFactory) {
     processoDao = daoFactory.getProcessDao();
   }
 

@@ -30,7 +30,7 @@ public interface ProcessService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta salvar no banco de
    *         dados.
    */
-  public void save(Process process) throws ValidationException, DatabaseException;
+  public void save(/*@ non_null @*/Process process) throws ValidationException, DatabaseException;
 
   /**
    * Atualiza os dados do processo no banco de dados após validação de regars de negócio.
@@ -40,7 +40,8 @@ public interface ProcessService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta atualizar processo no
    *         banco de dados.
    */
-  public void update(Process process) throws ValidationException, DatabaseException;
+  //@ requires process.getId()!=null;
+  public void update(/*@ non_null @*/Process process) throws ValidationException, DatabaseException;
 
   /**
    * Exclui o processo no banco de dados.
@@ -51,7 +52,8 @@ public interface ProcessService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta excluir interessado
    *         no banco de dados.
    */
-  public void delete(Process process, String admUser, String password) throws DatabaseException;
+  //@ requires process.getId()!=null && !admUser.isEmpty() && !password.isEmpty();
+  public void delete(/*@ non_null @*/Process process, /*@ non_null @*/String admUser, /*@ non_null @*/String password) throws DatabaseException;
 
   /**
    * Busca o processo de acordo com os parametros estabelecidos no searchData.
@@ -62,7 +64,7 @@ public interface ProcessService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta procurar no banco de
    *         dados.
    */
-  public List<Process> searchAll(Search searchData) throws ValidationException, DatabaseException;
+  public List<Process> searchAll(/*@ non_null @*/Search searchData) throws ValidationException, DatabaseException;
 
   /**
    * Obtém um binário com o documento Pdf gerado a partir do processo fornecido por parâmetro.
@@ -71,7 +73,7 @@ public interface ProcessService {
    * 
    * @return Binário do Pdf.
    */
-  public byte[] getPdf(Process process);
+  public byte[] getPdf(/*@ non_null @*/Process process);
 
   /**
    * Anexa um observador na classe para que seja notificado quando ocorre mudanças na lista de
@@ -79,7 +81,7 @@ public interface ProcessService {
    * 
    * @param observer observador que será anexado.
    */
-  public void attach(Observer observer);
+  public void attach(/*@ non_null @*/Observer observer);
 
   /**
    * Desanexa um observador da classe para que não seja mais notificado quando ocorrer mudanças na
@@ -87,5 +89,5 @@ public interface ProcessService {
    * 
    * @param observer observador que será desanexado.
    */
-  public void dettach(Observer observer);
+  public void dettach(/*@ non_null @*/Observer observer);
 }
