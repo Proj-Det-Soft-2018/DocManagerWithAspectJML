@@ -25,12 +25,11 @@ public class HealthInterested implements Interested {
 	
 	
 	
-	/*@ requires id != null;
-	  @ requires nome != null && cpf != null && contato != null;
+	/*@ assignable this.id, this.name, this.cpf, this.contact;
 	  @ ensures this.id == id && this.name == nome;
 	  @	ensures this.cpf == cpf && this.contact == contato;
 	  @*/
-	public HealthInterested(Long id, String nome, String cpf, String contato) {
+	public HealthInterested(/*@ non_null @*/Long id, /*@ non_null @*/String nome, /*@ non_null @*/String cpf, /*@ non_null @*/String contato) {
 		this.id = id;
 		this.name = nome;
 		this.cpf = cpf;
@@ -38,11 +37,11 @@ public class HealthInterested implements Interested {
 		
 	}
 	
-	/*@ requires nome != null && cpf != null && contato != null;
+	/*@ assignable this.name, this.cpf, this.contact;
 	  @ ensures this.name == nome;
 	  @	ensures this.cpf == cpf && this.contact == contato;
 	  @*/
-	public HealthInterested(String nome, String cpf, String contato) {
+	public HealthInterested(/*@ non_null @*/String nome, /*@ non_null @*/String cpf, /*@ non_null @*/String contato) {
 		this.name = nome;
 		this.cpf = cpf;
 		this.contact = contato;
@@ -131,10 +130,18 @@ public class HealthInterested implements Interested {
 	}
 	
    /*@ also
-     @ 	ensures this.contact != null && this.contact.length() > 10; 
-     @ 	ensures this.name != null && this.name.length() != 0;
-     @ 	ensures this.name.matches("[a-zA-Z\\s]+");
-     @ 	ensures this.cpf != null && this.cpf.length() == 11;
+     @  public normal_behavior
+     @ 		ensures this.contact != null && this.contact.length() > 10; 
+     @ 		ensures this.name != null && this.name.length() != 0;
+     @ 		ensures this.name.matches("[a-zA-Z\\s]+");
+     @ 		ensures this.cpf != null && this.cpf.length() == 11;
+     @ also
+     @   public exceptional_behavior
+     @ 		requires this.contact == null || this.contact.length() <= 10; 
+     @ 		requires this.name == null || this.name.length() == 0;
+     @ 		requires !this.name.matches("[a-zA-Z\\s]+");
+     @ 		requires this.cpf == null || this.cpf.length() != 11;
+     @		signals_only ValidationException;	 
 	 @*/
 	@Override
 	public void validate() throws ValidationException {

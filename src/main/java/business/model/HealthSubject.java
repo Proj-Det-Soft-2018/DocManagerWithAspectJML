@@ -30,10 +30,13 @@ public enum HealthSubject implements Subject {
 	AV_REC_SUPERIOR("Av. por Rec. Superior","Avaliação da capacidade laborativa por recomendação superior"),
 	AV_READAPTACAO("Av. Readaptação","Avaliação da capacidade laborativa para Fins de Readaptação");
 	
-	private /*@ spec_public nullable @*/ String description;
-	private /*@ spec_public nullable @*/ String shortDescription;
+	private /*@ spec_public @*/ String description;
+	private /*@ spec_public @*/ String shortDescription;
 	
-	HealthSubject(String shortDescription, String description){
+	/*@ assignable this.shortDescription, this.description;
+	  @ ensures this.shortDescription == shortDescription && this.description == description;
+	  @*/
+	HealthSubject(/*@ non_null @*/String shortDescription, /*@ non_null @*/String description){
 		this.shortDescription = shortDescription;
 		this.description = description;
 	}
@@ -53,7 +56,9 @@ public enum HealthSubject implements Subject {
 	    return ordinal();
 	}
 
-
+	/*@	ensures \result.size() == 21;
+	  @	ensures \result.contains(NULL) == false;
+	  @*/
 	public static List<Subject> getAll() {
 		List<Subject> subjectList = new ArrayList<>();
 		for(HealthSubject subject : HealthSubject.values()) {
@@ -63,6 +68,9 @@ public enum HealthSubject implements Subject {
 		return subjectList;
 	}
 	
+	/*@ requires id >=0 && id < 22;
+	  @   ensures \result != null;
+	  @*/
 	public static HealthSubject getSubjectById(int id){
 		return HealthSubject.values()[id];
 	}

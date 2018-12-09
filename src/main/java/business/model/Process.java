@@ -6,8 +6,8 @@ import business.exception.ValidationException;
  * Representação de um Processo.
  */
 public interface Process {
-
-  Long getId();
+	
+	/*@ pure @*/  Long getId();
 
   void setId(Long processId);
 
