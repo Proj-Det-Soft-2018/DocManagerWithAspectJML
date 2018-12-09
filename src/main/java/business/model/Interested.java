@@ -6,10 +6,20 @@ import business.exception.ValidationException;
  * Representação de um Interessado em um Processo.
  */
 public interface Interested {
+  
+  //@ model instance Long interestedId;
 
-  Long getId();
+  //@ public invariant interestedId.longValue() >= 0l;
+  //@ public initially interestedId != null;
+  
+  //@ ensures \result == interestedId.longValue();
+  public /*@ pure @*/ long getId();
 
-  void setId(Long id);
+ /*@ requires id >= 0l;
+   @ assignable interestedId;
+   @ ensures interestedId.longValue() == id;
+   @*/
+  public void setId(long id);
 
   /**
    * Método que realiza a validação do Interessado.
@@ -18,5 +28,4 @@ public interface Interested {
    */
   //@ requires this != null;
   public /*@ pure @*/ void validate() throws ValidationException;
-
 }
