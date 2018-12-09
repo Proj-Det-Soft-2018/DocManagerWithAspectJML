@@ -7,11 +7,28 @@ public class HealthProcessSearch implements Search {
     
     private /*@ spec_public nullable @*/ String number;
     private /*@ spec_public nullable @*/ String name;
-    private /*@ spec_public nullable @*/ String cpf; 
-    private int situationId;
-    private int organizationId;
-    private int subjectId;
+    private /*@ spec_public nullable @*/ String cpf; //@ in cpfInterested;
+    /*@ protected represents
+    @ cpfInterested = cpf;
+    @*/
+    private /*@ spec_public  @*/int situationId;
+    private /*@ spec_public  @*/int organizationId;
+    private /*@ spec_public  @*/int subjectId;
 
+    
+    /*@ also
+    @  public normal_behavior
+    @ 		ensures  !(number == null || number.isEmpty()) || 
+    @ 				 !(name == null || name.isEmpty()) ||
+    @ 		         (situationId != 0) || (organizationId != 0) || (subjectId != 0);
+    @ also
+    @   public exceptional_behavior
+    @ 		requires (number == null || number.isEmpty()) && 
+    @ 				 (name == null || name.isEmpty()) &&
+    @ 		         (cpf == null || cpf.isEmpty()) &&
+    @ 		         (situationId == 0) && (organizationId == 0) && (subjectId == 0);
+    @		signals_only ValidationException;	 
+	 @*/
     @Override
     public void validate() throws ValidationException {
         boolean invalidNumber = (number == null || number.isEmpty());
