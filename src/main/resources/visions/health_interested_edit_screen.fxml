@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import presentation.utils.widget.MaskedContactTextField?>
+<?import presentation.utils.widget.MaskedContactTF?>
 
 <VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0"
@@ -45,7 +45,7 @@
 						<Label fx:id="lblTxtCpf" GridPane.columnIndex="1" />
 						<TextField fx:id="txtName" GridPane.columnIndex="1"
 							GridPane.rowIndex="1" />
-						<MaskedContactTextField fx:id="txtContact"
+						<MaskedContactTF fx:id="txtContact"
 							GridPane.columnIndex="1" GridPane.rowIndex="2" />
 					</children>
 					<VBox.margin>

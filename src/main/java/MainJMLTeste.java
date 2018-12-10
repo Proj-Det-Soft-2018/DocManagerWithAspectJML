@@ -136,6 +136,5 @@ public class MainJMLTeste {
 		} catch (DatabaseException e) {
 			System.err.println(e.getMessage());
 		}
-
 	}
 }

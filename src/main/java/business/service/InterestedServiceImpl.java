@@ -50,7 +50,7 @@ public class InterestedServiceImpl extends Observable implements InterestedServi
   }
 
   @Override
-  public Interested search(Search searchData) throws ValidationException, DatabaseException {
+  public /*@ nullable @*/ Interested search(Search searchData) throws ValidationException, DatabaseException {
     searchData.validate();
     return interessadoDao.search(searchData);
   }

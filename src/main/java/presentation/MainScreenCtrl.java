@@ -73,7 +73,7 @@ public abstract class MainScreenCtrl implements Initializable, Observer {
   }
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize(URL location, /*@ nullable @*/ResourceBundle resources) {
     processService.attach(this);
     configureTable();
     updateTable();

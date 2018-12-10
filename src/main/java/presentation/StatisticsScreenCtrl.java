@@ -96,7 +96,7 @@ public class StatisticsScreenCtrl implements Initializable {
   }
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize(URL location, /*@ nullable @*/ResourceBundle resources) {
     try {
       if (processService.pullList().size() != 0) {
         createChartQntPerMonthAndYear();

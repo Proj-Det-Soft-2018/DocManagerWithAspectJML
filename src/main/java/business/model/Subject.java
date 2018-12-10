@@ -5,9 +5,15 @@ package business.model;
  */
 public interface Subject {
 
-  String getDescription();
+  //@ model instance nullable String subjDescription;
+  //@ model instance nullable String subjShortDesc;
+  
+  //@ ensures \result == null || \result.equals(subjDescription);
+  public /*@ pure @*/String getDescription();
 
-  String getShortDescription();
+  //@ ensures \result == null || \result.equals(subjShortDesc);
+  public /*@ pure @*/String getShortDescription();
 
-  int getId();
+  //@ ensures \result >= 0;
+  public /*@ pure @*/int getId();
 }

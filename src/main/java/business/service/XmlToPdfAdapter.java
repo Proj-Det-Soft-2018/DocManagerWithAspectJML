@@ -44,13 +44,8 @@ public class XmlToPdfAdapter {
     fopFactory = generateFopFactory();
     foUserAgent = generateFOUserAgent();
   }
-
-  /*@ 
-  @    ensures \result != null;
-  @  also
-  @    ensures \result == null;
-  @*/
-  private Transformer generateTransformer() {
+  
+  private /*@ nullable @*/ Transformer generateTransformer() {
 
     try {
       TransformerFactory tf = TransformerFactory.newInstance();

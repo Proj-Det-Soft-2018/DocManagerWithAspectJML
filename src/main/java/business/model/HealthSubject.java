@@ -7,7 +7,7 @@ import business.model.Subject;
 
 public enum HealthSubject implements Subject {
 	
-	NULL("INV","- Inválido -"),
+	NULL(null,null),
 	APO("Aposentadoria","Aposentadoria por Invalidez"),
 	PENSAO("Pensão","Avaliação para fins de pensão"),
 	REMOCAOFAMILIA("Rem. Família","Remoção por motivo de saúde de pessoa de sua família"),
@@ -30,8 +30,10 @@ public enum HealthSubject implements Subject {
 	AV_REC_SUPERIOR("Av. por Rec. Superior","Avaliação da capacidade laborativa por recomendação superior"),
 	AV_READAPTACAO("Av. Readaptação","Avaliação da capacidade laborativa para Fins de Readaptação");
 	
-	private /*@ spec_public @*/ String description;
-	private /*@ spec_public @*/ String shortDescription;
+	private /*@ spec_public nullable @*/ String description; //@ in subjDescription;
+  //@ protected represents subjDescription <- description;
+	private /*@ spec_public nullable @*/ String shortDescription; //@ in subjShortDesc;
+  //@ protected represents subjShortDesc <- shortDescription;
 	
 	/*@ assignable this.shortDescription, this.description;
 	  @ ensures this.shortDescription == shortDescription && this.description == description;
@@ -58,6 +60,10 @@ public enum HealthSubject implements Subject {
 
 	/*@	ensures \result.size() == 19;
 	  @	ensures \result.contains(HealthSubject.NULL) == false;
+	  @ ensures (\forall int i;
+    @             0 <= i && i < \result.size();
+    @             \result.get(i) != null && !((Subject)\result.get(i)).getDescription().isEmpty() &&
+    @                 !((Subject)\result.get(i)).getShortDescription().isEmpty());
 	  @*/
 	public static List<Subject> getAll() {
 		List<Subject> subjectList = new ArrayList<>();
@@ -74,6 +80,4 @@ public enum HealthSubject implements Subject {
 	public static HealthSubject getSubjectById(int id){
 		return HealthSubject.values()[id];
 	}
-	
-
 }

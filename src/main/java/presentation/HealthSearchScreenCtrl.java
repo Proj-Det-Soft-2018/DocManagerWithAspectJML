@@ -78,31 +78,31 @@ public class HealthSearchScreenCtrl extends SearchScreenCtrl {
 	private /*@ spec_public nullable @*/ MaskedTextField mTxtProcessoNum;
 
 	@FXML
-	private TextField txtNome;
+	private /*@ spec_public nullable @*/ TextField txtNome;
 
 	@FXML
-	private ChoiceBox<String> choiceOrgao;
+	private /*@ spec_public nullable @*/ ChoiceBox<String> choiceOrgao;
 
 	@FXML
-	private ChoiceBox<String> choiceAssunto;
+	private /*@ spec_public nullable @*/ ChoiceBox<String> choiceAssunto;
 
 	@FXML
-	private ChoiceBox<String> choiceSituacao;
+	private /*@ spec_public nullable @*/ ChoiceBox<String> choiceSituacao;
 
 	@FXML
-	private TableColumn<HealthProcess, String> tabColTipo;
+	private /*@ spec_public nullable @*/ TableColumn<HealthProcess, String> tabColTipo;
 
 	@FXML
-	private TableColumn<HealthProcess, String> tabColNumero;
+	private /*@ spec_public nullable @*/ TableColumn<HealthProcess, String> tabColNumero;
 
 	@FXML
-	private TableColumn<HealthProcess, String> tabColInteressado;
+	private /*@ spec_public nullable @*/ TableColumn<HealthProcess, String> tabColInteressado;
 
 	@FXML
-	private TableColumn<HealthProcess, String> tabColSituacao;
+	private /*@ spec_public nullable @*/ TableColumn<HealthProcess, String> tabColSituacao;
 
-    @FXML
-    private TableColumn<HealthProcess, String> tabColumnRegDate;
+  @FXML
+  private /*@ spec_public nullable @*/ TableColumn<HealthProcess, String> tabColumnRegDate;
 	
 	public HealthSearchScreenCtrl(ProcessService processService, ListService listService,
 	        ControllerFactory controllerFactory) {

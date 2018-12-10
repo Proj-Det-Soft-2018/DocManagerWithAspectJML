@@ -64,7 +64,7 @@ public abstract class InterestedEditCtrl implements Initializable {
   }
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize(URL location, /*@ nullable @*/ResourceBundle resources) {
     populeForm();
   }
 

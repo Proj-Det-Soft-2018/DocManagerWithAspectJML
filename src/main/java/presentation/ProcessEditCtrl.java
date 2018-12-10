@@ -37,7 +37,7 @@ import presentation.utils.widget.ExceptionAlert;
   protected /*@ spec_public nullable @*/ Interested interested;
 
   @FXML
-  private Node root;
+  private /*@ spec_public nullable @*/ Node root;
 
   public static void showProcessEditScreen(Window ownerWindow, ProcessEditCtrl controller,
       Process process) {
@@ -80,7 +80,7 @@ import presentation.utils.widget.ExceptionAlert;
   }
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize(URL location, /*@ nullable @*/ResourceBundle resources) {
     interestedService.attach(this);
     initializeForm();
     Platform.runLater(this::configureClosure);

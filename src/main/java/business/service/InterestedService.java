@@ -49,7 +49,7 @@ public interface InterestedService {
    * @throws DatabaseException Exceção lançada por inconsistência quando tenta procurar no banco de
    *         dados.
    */
-  public Interested search(/*@ non_null @*/ Search searchData) throws ValidationException, DatabaseException;
+  public /*@ nullable @*/Interested search(/*@ non_null @*/ Search searchData) throws ValidationException, DatabaseException;
 
   /**
    * Anexa um observador na classe para que seja notificado quando ocorre mudanças na lista de
