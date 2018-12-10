@@ -102,13 +102,13 @@ public class HealthInterested implements Interested {
 
   /*@ also
    @  public normal_behavior
-   @ 		ensures this.contact != null && this.contact.length() > 10; 
+   @ 		ensures this.contact != null && this.contact.length() >= 10; 
    @ 		ensures this.name != null && this.name.length() != 0;
    @ 		ensures this.name.matches("[a-zA-Z\\s]+");
    @ 		ensures this.cpf != null && this.cpf.length() == 11;
    @ also
    @   public exceptional_behavior
-   @ 		requires this.contact == null || this.contact.length() <= 10; 
+   @ 		requires this.contact == null || this.contact.length() < 10; 
    @ 		requires this.name == null || this.name.length() == 0;
    @ 		requires !this.name.matches("[a-zA-Z\\s]+");
    @ 		requires this.cpf == null || this.cpf.length() != 11;
