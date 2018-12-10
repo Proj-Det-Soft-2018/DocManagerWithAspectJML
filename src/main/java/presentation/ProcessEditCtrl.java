@@ -75,7 +75,7 @@ import presentation.utils.widget.ExceptionAlert;
     this.interested = null;
   }
 
-  private void setOriginalProcess(Process originalProcess) {
+  private void setOriginalProcess(/*@ nullable @*/Process originalProcess) {
     this.originalProcess = originalProcess;
   }
 

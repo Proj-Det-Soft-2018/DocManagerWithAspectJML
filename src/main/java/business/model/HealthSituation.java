@@ -53,7 +53,7 @@ public enum HealthSituation implements Situation {
   }
 
   @Override
-  public String getDescription() {
+  public /*@ nullable @*/ String getDescription() {
     return description;
   }
 

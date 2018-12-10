@@ -10,7 +10,7 @@ public interface Situation {
   //@ model instance nullable String sitDescription;
 
   //@ ensures \result == null || \result.equals(sitDescription);
-  public /*@ pure @*/ String getDescription();
+  public /*@ pure nullable @*/ String getDescription();
 
   //@ ensures \result >= 0;
   public /*@ pure @*/ int getId();
@@ -24,7 +24,8 @@ public interface Situation {
   /*@ ensures \result != null && \result.isEmpty() == false;
    @  ensures (\forall int i;
    @               0 <= i && i < \result.size();
-   @               \result.get(i) != null && !((Situation)\result.get(i)).getDescription().isEmpty());
+   @               \result.get(i) != null && 
+   @                   (((Situation)\result.get(i)).getDescription() == null || !((Situation)\result.get(i)).getDescription().isEmpty()));
    @  ensures (\exists int i;
    @              0 <= i && i < \result.size();
    @              \result.get(i) == this);

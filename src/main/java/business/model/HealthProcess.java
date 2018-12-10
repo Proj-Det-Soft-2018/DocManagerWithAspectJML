@@ -179,7 +179,7 @@ public class HealthProcess implements Process {
   }
 
   @XmlElement(name="out")
-  public LocalDateTime getDispatchDate() {
+  public /*@ nullable @*/ LocalDateTime getDispatchDate() {
     return dispatchDate;
   }
 
